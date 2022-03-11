@@ -1,0 +1,81 @@
+﻿<Window x:Class="City.Views.ShellWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:prism="http://prismlibrary.com/" 
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        Title="Ctcontrol"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        MaxHeight="300"
+        MaxWidth="200"
+        >
+
+    <Border
+        CornerRadius="8"
+        Height="300"
+        Width="200">
+        <Grid>
+            <Image
+                Style="{DynamicResource WallPaper}"/>
+            <ContentControl
+                prism:RegionManager.RegionName="ContentRegion"/>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top">
+                <Button Height="13"
+                        Width="36"
+                        VerticalAlignment="Top"
+                        ToolTip="{DynamicResource m_MoveButton}"
+                        Style="{DynamicResource ApplicationButton}"
+                        PreviewMouseLeftButtonDown="Button_Move">
+                    <Image Source="{DynamicResource MoveIcon}"/>
+                </Button>
+            </StackPanel>
+            <StackPanel Orientation="Vertical"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Margin="0 3 8 0">
+                <StackPanel Orientation="Horizontal"
+                            Margin="0 0 0 5">
+                    <Button Height="15"
+                            Width="15"
+                            Margin="0 0 5 0"
+                            VerticalAlignment="Top"
+                            ToolTip="{DynamicResource m_SettingsButton}"
+                            Style="{DynamicResource ApplicationButton}"
+                            Command="{Binding NavigateCommand}" 
+                            CommandParameter="MainSettingsView">
+                                <Image Source="{DynamicResource SettingsIcon}"/>
+                    </Button>
+                    <Button Height="15"
+                            Width="15"
+                            VerticalAlignment="Top"
+                            ToolTip="{DynamicResource m_CloseButton}"
+                            Style="{DynamicResource ApplicationButton}"
+                            Command="{Binding CloseAppCommand}">
+                                <Image Source="{DynamicResource CloseAppIcon}"/>
+                    </Button>
+                    </StackPanel>
+                    <Button Height="20"
+                            Width="15"
+                            Margin="0 0 0 5"
+                            ToolTip="{DynamicResource m_MobileButton}"
+                            Style="{DynamicResource ApplicationButton}">
+                                <Image Source="{DynamicResource MobileIcon}"/>
+                    </Button>
+                    <Button Height="20"
+                            Width="35"
+                            ToolTip="{DynamicResource m_PCButton}"
+                            Style="{DynamicResource ApplicationButton}"
+                            Command="{Binding NavigateCommand}" 
+                            CommandParameter="ControlView">
+                                <Image Source="{DynamicResource NotebookIcon}"/>
+                    </Button>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

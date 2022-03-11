@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="ModuleSettings.Views.MainSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ModuleSettings.Views"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             d:Height="300"
+             d:Width="200"
+             mc:Ignorable="d" >
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
+                <Button Height="15"
+                        Width="15"
+                        Margin="8 3 0 0"
+                        ToolTip="{DynamicResource m_BackButton}"
+                        Style="{DynamicResource ControlButton}"
+                        Command="{Binding NavigateCommand}" 
+                        CommandParameter="MainView">
+                    <Image Source="{DynamicResource ArrowIcon}"/>
+                </Button>
+
+            </StackPanel>
+                <TextBlock Text="{DynamicResource m_SettingsButton}"
+                           Margin="20 20 0 0"
+                           Foreground="White"
+                           FontFamily="Segoe UI Symbol"
+                           FontWeight="Regular"
+                           FontSize="13"/>
+        </StackPanel>
+        <StackPanel Orientation="Vertical"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="0 0 0 20">
+                <Button Height="65"
+                        Width="65"
+                        ToolTip="{DynamicResource m_LanguageButton}"
+                        Style="{DynamicResource SettingsButton}"
+                        Command="{Binding NavigateCommand}" 
+                        CommandParameter="LanguageSettingsView">
+                    <Image Height="45"
+                           Width="45"
+                           Source="{DynamicResource LanguageIcon}"/>
+                </Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button Height="65"
+                        Width="65"
+                        Margin="0 0 25 0"
+                        ToolTip="{DynamicResource m_CommonButton}"
+                        Style="{DynamicResource SettingsButton}"
+                        Command="{Binding NavigateCommand}" 
+                        CommandParameter="CommonSettingsView">
+                    <Image Height="45"
+                           Width="45"
+                           Source="{DynamicResource CommonIcon}"/>
+                </Button>
+                <Button Height="65"
+                        Width="65"
+                        ToolTip="{DynamicResource m_WallpaperButton}"
+                        Style="{DynamicResource SettingsButton}"
+                        Command="{Binding NavigateCommand}" 
+                        CommandParameter="WallpaperSettingsView">
+                    <Image Height="45"
+                           Width="45"
+                           Source="{DynamicResource WallpaperIcon}"/>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

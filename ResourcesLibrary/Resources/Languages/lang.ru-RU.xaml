@@ -1,0 +1,30 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<v:String x:Key="m_WorkTime">Время работы</v:String>
+	<v:String x:Key="m_CPUTemperature">Температура процессора</v:String>
+	<v:String x:Key="m_GPUTemperature">Температура видеопроцессора</v:String>
+	<v:String x:Key="m_BatteryCharge">Заряд батари</v:String>
+	<v:String x:Key="m_SystemControl">Контроль сиситемы</v:String>
+    <v:String x:Key="m_ShutdownButton">Завершить работу</v:String>
+    <v:String x:Key="m_RestartButton">Перезагрузка</v:String>
+    <v:String x:Key="m_SleepButton">Спящий режим</v:String>
+    <v:String x:Key="m_MoveButton">Переместить</v:String>
+    <v:String x:Key="m_CloseButton">Закрыть</v:String>
+    <v:String x:Key="m_SettingsButton">Настройки</v:String>
+    <v:String x:Key="m_MobileButton">Подключение телефона</v:String>
+    <v:String x:Key="m_PCButton">Контроль системы</v:String>
+    <v:String x:Key="m_BackButton">Назад</v:String>
+    <v:String x:Key="m_LanguageButton">Языки</v:String>
+    <v:String x:Key="m_WallpaperButton">Обои</v:String>
+    <v:String x:Key="m_CommonButton">Общие</v:String>
+    <v:String x:Key="m_Next">Следующий</v:String>
+    <v:String x:Key="m_Previous">Предидущий</v:String>
+    <v:String x:Key="m_Apply">Применить</v:String>
+    <v:String x:Key="m_D">Д</v:String>
+    <v:String x:Key="m_H">ч</v:String>
+    <v:String x:Key="m_m">м</v:String>
+    <v:String x:Key="m_s">с</v:String>
+    <v:String x:Key="m_Autostart">Добавить в автозагрузку</v:String>
+    <v:String x:Key="m_ShowSeconds">Показывать секунды</v:String>
+</ResourceDictionary>
