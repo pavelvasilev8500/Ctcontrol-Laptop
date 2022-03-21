@@ -17,7 +17,6 @@ It contain 3 buttons to control you pc
 ![image 129](https://user-images.githubusercontent.com/61418223/157874227-0f9eeb24-61ac-4c12-89fc-2a3bb939bc4b.png)
 ![image 130](https://user-images.githubusercontent.com/61418223/157874229-97ea8e65-5b72-4f1b-a3ab-f283a2369778.png)
 
-System Requrement
-.NET Framework 4.8.0
+System Requrement: .NET Framework 4.8.0
 
 Also awalable mobile application for android devices where you can see actual information aboult your pc and control in remotly.
