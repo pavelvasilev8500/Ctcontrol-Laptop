@@ -1,9 +1,9 @@
 # CtcontrolNew
 Ctcontrol is a gadget for Windows OS, that can help you to see information aboult your pc and control it.
 It contain 3 buttons to control you pc
-|   ![Component 126](https://user-images.githubusercontent.com/61418223/143914815-9a29318b-d53a-4549-8b32-3cf4488816f5.png)    |   ![Component 127](https://user-images.githubusercontent.com/61418223/143914891-c1bf42fd-e3f0-4595-bd72-03ee75d5e964.png)   |   ![Component 128](https://user-images.githubusercontent.com/61418223/143914937-a32c59ce-f54c-4e24-b517-14e456312d66.png)  |
-| ------- | ------ | ----- |
-| sleep | poweroff | reset |  
+| ![Component 175](https://user-images.githubusercontent.com/61418223/159235026-b9d2e77e-2381-434e-a017-314ebda3f75c.png) | ![Ellipse 91](https://user-images.githubusercontent.com/61418223/159234949-df3eff9d-22b3-4106-8a0f-fe56a63d5652.png) | ![Component 176](https://user-images.githubusercontent.com/61418223/159235003-a095157f-ccdf-42b8-a756-b854b8430307.png) |
+| -------- | ----- | ----- |
+| Shutdown | Reset | Sleep |  
 
 ![image 122](https://user-images.githubusercontent.com/61418223/157874182-0cf99e14-9de2-47ab-a4f7-de981cc1f2a6.png)
 ![image 123](https://user-images.githubusercontent.com/61418223/157874193-2a5491d1-624b-4fed-af71-47b68cf45848.png)
