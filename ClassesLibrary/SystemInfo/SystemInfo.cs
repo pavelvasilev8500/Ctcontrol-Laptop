@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Windows;
 using System.Windows.Forms;
-using ModuleMain.Classes;
 using OpenHardwareMonitor.Hardware;
 
 namespace ClassesLibrary.SystemInfo
@@ -80,107 +77,59 @@ namespace ClassesLibrary.SystemInfo
         {
             return (SystemInformation.PowerStatus.BatteryLifePercent * 100).ToString() + "%";
         }
-        /// <summary>
-        /// Classes GetCPU & GPU Temperature with V-end using Class Visitor for access to hardware.
-        /// </summary>
-        /// <returns>
-        /// String value
-        /// </returns>
-        public static string GetCPUTemperatureV()
+        public static (string, string) GetTemperature()
         {
-            var visitor = new Visitor();
-            Computer computer = new Computer();
-            computer.Open();
-            computer.CPUEnabled = true;
-            computer.Accept(visitor);
-            for (int i = 0; i < computer.Hardware.Length; i++)
+            try
             {
-                if (computer.Hardware[i].HardwareType == HardwareType.CPU)
+                computer.Open();
+                foreach (var hardware in computer.Hardware)
                 {
-                    for (int j = 0; j < computer.Hardware[i].Sensors.Length; j++)
+                    if (hardware.HardwareType == HardwareType.CPU)
                     {
-                        if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Temperature)
-                            CPUTemperature = computer.Hardware[i].Sensors[j].Value.ToString();
-                    }
-                }
-            }
-            computer.Close();
-            CPUTemperature = CPUTemperature.Substring(0, 2);
-            CPUTemperature = CPUTemperature + " ℃";
-            return CPUTemperature;
-        }
-        public static string GetGPUTemeratureV()
-        {
-            var visitor = new Visitor();
-            Computer computer = new Computer();
-            computer.Open();
-            computer.GPUEnabled = true;
-            computer.Accept(visitor);
-            for (int i = 0; i < computer.Hardware.Length; i++)
-            {
-                if (computer.Hardware[i].HardwareType == HardwareType.GpuNvidia)
-                {
-                    for (int j = 0; j < computer.Hardware[i].Sensors.Length; j++)
-                    {
-                        if (computer.Hardware[i].Sensors[j].SensorType == SensorType.Temperature)
-                            GPUTemperature = computer.Hardware[i].Sensors[j].Value.ToString();
-                    }
-                }
-            }
-            computer.Close();
-            GPUTemperature = GPUTemperature + " ℃";
-            return GPUTemperature;
-        }
-        public static string GetCPUTemperature()
-        {
-            computer.Open();
-            foreach (var hardware in computer.Hardware)
-            {
-                if (hardware.HardwareType == HardwareType.CPU)
-                {
-                    hardware.Update();
-                    foreach (var sensor in hardware.Sensors)
-                    {
-                        if(sensor.SensorType == SensorType.Temperature)
+                        hardware.Update();
+                        foreach (var sensor in hardware.Sensors)
                         {
-                            CPUTemperature = sensor.Value.ToString();
+                            if (sensor.SensorType == SensorType.Temperature)
+                            {
+                                CPUTemperature = sensor.Value.ToString();
+                                break;
+                            }
+                        }
+                    }
+                    if (hardware.HardwareType == HardwareType.GpuNvidia)
+                    {
+                        hardware.Update();
+                        foreach (var sensor in hardware.Sensors)
+                        {
+                            if (sensor.SensorType == SensorType.Temperature)
+                            {
+                                GPUTemperature = sensor.Value.ToString() + " ℃ " + $"({hardware.HardwareType.ToString()})";
+                                break;
+                            }
+                        }
+                    }
+                    else if (hardware.HardwareType == HardwareType.GpuAti)
+                    {
+                        hardware.Update();
+                        foreach (var sensor in hardware.Sensors)
+                        {
+                            if (sensor.SensorType == SensorType.Temperature)
+                            {
+                                GPUTemperature = sensor.Value.ToString() + " ℃ " + $"({hardware.HardwareType.ToString()})";
+                                break;
+                            }
                         }
                     }
                 }
+                CPUTemperature = CPUTemperature.Substring(0, 2);
+                CPUTemperature = CPUTemperature + " ℃";
             }
-            CPUTemperature = CPUTemperature.Substring(0, 2);
-            CPUTemperature = CPUTemperature + " ℃";
-            return CPUTemperature;  
-        }
-        public static string GetGPUTemerature()
-        {
-            computer.Open();
-            foreach (var hardware in computer.Hardware)
+            catch (Exception)
             {
-                if (hardware.HardwareType == HardwareType.GpuNvidia)
-                {
-                    hardware.Update();
-                    foreach (var sensor in hardware.Sensors)
-                    {
-                        if (sensor.SensorType == SensorType.Temperature)
-                        {
-                            GPUTemperature = sensor.Value.ToString() + " ℃ " + $"({hardware.HardwareType.ToString()})";
-                        }
-                    }
-                }
-                else if (hardware.HardwareType == HardwareType.GpuAti)
-                {
-                    hardware.Update();
-                    foreach (var sensor in hardware.Sensors)
-                    {
-                        if (sensor.SensorType == SensorType.Temperature)
-                        {
-                            GPUTemperature = sensor.Value.ToString() + " ℃ " + $"({hardware.HardwareType.ToString()})";
-                        }
-                    }
-                }
+                CPUTemperature = "50";
+                GPUTemperature = "50";
             }
-            return GPUTemperature;
+            return (CPUTemperature, GPUTemperature);
         }
     }
 }

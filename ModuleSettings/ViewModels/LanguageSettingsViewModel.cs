@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using ClassesLibrary.Classes;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 using ResourcesLibrary.Resources.Languages.Classes;

@@ -120,31 +120,43 @@ namespace ModuleMain.ViewModels
             data.Name = "UpdateDataThread";
             temperature.Name = "UpdateTemperatureThread";
             data.Start();
+            UpdateSeconds();
             temperature.Start();
         }
         private void UpdateData()
         {
             do
             {
-                Date = SystemInfo.GetDate();
                 Time = SystemInfo.GetStandartTime();
-                Second = SystemInfo.GetSecond();
+                Date = SystemInfo.GetDate();
                 Day = SystemInfo.GetDay();
                 WorkTimeDay = SystemInfo.GetPcWorkTimeDay();
                 WorkTimeHour = SystemInfo.GetPcWorkTimeHour();
                 WorkTimeMinut = SystemInfo.GetPcWorkTimeMinut();
-                WorkTimeSecond = SystemInfo.GetPcWorkTimeSecond();
                 Batary = SystemInfo.GetNotebookBatary();
                 Thread.Sleep(1000);
             }
             while (!cts.IsCancellationRequested);
         }
+        private void UpdateSeconds()
+        {
+            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+            timer.Enabled = true;
+            timer.Tick += UpdateSecondsTimer;
+            timer.Interval = 1000;
+            timer.Start();
+        }
+        private void UpdateSecondsTimer(object sender, EventArgs e)
+        {
+            Second = SystemInfo.GetSecond();
+            WorkTimeSecond = SystemInfo.GetPcWorkTimeSecond();
+        }
         private void UpdateTemerature()
         {
             do
             {
-                CPUtemperature = SystemInfo.GetCPUTemperature();
-                GPUtemperature = SystemInfo.GetGPUTemerature();
+                CPUtemperature = SystemInfo.GetTemperature().Item1;
+                GPUtemperature = SystemInfo.GetTemperature().Item2;
             }
             while (!cts.IsCancellationRequested);
         }

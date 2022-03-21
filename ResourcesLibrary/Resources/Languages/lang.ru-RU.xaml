@@ -27,4 +27,6 @@
     <v:String x:Key="m_s">с</v:String>
     <v:String x:Key="m_Autostart">Добавить в автозагрузку</v:String>
     <v:String x:Key="m_ShowSeconds">Показывать секунды</v:String>
+    <v:String x:Key="m_QRDescription">Просканируйте QR-код с помощь приложения CtcontrolMobile для подключения к компьютеру.</v:String>
+    <v:String x:Key="m_Anothercopy">Нельзя запустить несколько копий программы.</v:String>
 </ResourceDictionary>

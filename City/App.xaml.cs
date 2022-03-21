@@ -5,6 +5,7 @@ using Prism.Ioc;
 using Prism.Modularity;
 using ModuleMain;
 using ModuleSettings;
+using ModuleMobile;
 
 namespace City
 {
@@ -27,6 +28,7 @@ namespace City
         {
             moduleCatalog.AddModule<ModuleMainModule>();
             moduleCatalog.AddModule<ModuleSettingsModule>();
+            moduleCatalog.AddModule<ModuleMobileModule>();
         }
     }
 }

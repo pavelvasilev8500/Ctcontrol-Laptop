@@ -1,5 +1,21 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="City.Properties" GeneratedClassName="Settings">
   <Profiles />
-  <Settings />
+  <Settings>
+    <Setting Name="FirstStart" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ClientId" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SystemUri" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://ctcontrolapi.herokuapp.com/systemdata</Value>
+    </Setting>
+    <Setting Name="ClientUri" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://ctcontrolapi.herokuapp.com/clientdata</Value>
+    </Setting>
+    <Setting Name="StatusUri" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://ctcontrolapi.herokuapp.com/statusdata</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

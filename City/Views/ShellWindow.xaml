@@ -15,9 +15,7 @@
         >
 
     <Border
-        CornerRadius="8"
-        Height="300"
-        Width="200">
+        CornerRadius="8">
         <Grid>
             <Image
                 Style="{DynamicResource WallPaper}"/>
@@ -64,8 +62,10 @@
                             Width="15"
                             Margin="0 0 0 5"
                             ToolTip="{DynamicResource m_MobileButton}"
-                            Style="{DynamicResource ApplicationButton}">
-                                <Image Source="{DynamicResource MobileIcon}"/>
+                            Style="{DynamicResource ApplicationButton}"
+                            Command="{Binding NavigateCommand}" 
+                            CommandParameter="MobileView">
+                    <Image Source="{DynamicResource MobileIcon}"/>
                     </Button>
                     <Button Height="20"
                             Width="35"

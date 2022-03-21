@@ -5,6 +5,10 @@ using Prism.Regions;
 using Prism.Commands;
 using System;
 using System.Threading;
+using ClassesLibrary.ServerWork;
+using ClassesLibrary.Client;
+using Prism.Events;
+using ClassesLibrary.Classes;
 
 namespace ModuleMain.ViewModels
 {
@@ -18,6 +22,7 @@ namespace ModuleMain.ViewModels
         private string _cputemperature;
         private string _gputemperature;
         private readonly IRegionManager _regionManager;
+        IEventAggregator _ea;
         public string WorkTimeDay
         {
             get { return _worktimeday; }
@@ -53,6 +58,10 @@ namespace ModuleMain.ViewModels
             get { return _gputemperature; }
             set { SetProperty(ref _gputemperature, value); }
         }
+        private string ClientId { get; set; }
+        private string SystemUri { get; set; }
+        private string StatusUri { get; set; }
+        private bool IsConnection = false;
         public bool KeepAlive
         {
             get { return false; }
@@ -62,15 +71,35 @@ namespace ModuleMain.ViewModels
         public DelegateCommand RestartCommand { get; private set; }
         public DelegateCommand SleepCommand { get; private set; }
         CancellationTokenSource cts = new CancellationTokenSource();
-        public ControlViewModel(IRegionManager regionManager)
+        public ControlViewModel(IRegionManager regionManager, IEventAggregator ea)
         {
             ThreadController();
             _regionManager = regionManager;
+            _ea = ea;
+            _ea.GetEvent<SendIdEvent>().Subscribe(Id);
+            _ea.GetEvent<SendSystemUriEvent>().Subscribe(System);
+            _ea.GetEvent<SendStatusUriEvent>().Subscribe(Status);
             NavigateCommand = new DelegateCommand<string>(Navigate);
             ShutdonCommand = new DelegateCommand(Shutdown);
             RestartCommand = new DelegateCommand(Restart);
             SleepCommand = new DelegateCommand(Sleep);
         }
+
+        private void Id(string id)
+        {
+            ClientId = id;
+        }
+
+        private void System(string systemuri)
+        {
+            SystemUri = systemuri;
+        }
+
+        private void Status(string statusuri)
+        {
+            StatusUri = statusuri;
+        }
+
         private void ThreadController()
         {
             Thread data = new Thread(() =>
@@ -84,6 +113,7 @@ namespace ModuleMain.ViewModels
             data.Name = "UpdateDataThreadFromControl";
             temperature.Name = "UpdateTemperatureThreadFromControl";
             data.Start();
+            UpdateSecond();
             temperature.Start();
         }
         private void UpdateData()
@@ -93,18 +123,29 @@ namespace ModuleMain.ViewModels
                 WorkTimeDay = SystemInfo.GetPcWorkTimeDay();
                 WorkTimeHour = SystemInfo.GetPcWorkTimeHour();
                 WorkTimeMinut = SystemInfo.GetPcWorkTimeMinut();
-                WorkTimeSecond = SystemInfo.GetPcWorkTimeSecond();
                 Batary = SystemInfo.GetNotebookBatary();
                 Thread.Sleep(1000);
             }
             while (!cts.IsCancellationRequested);
         }
+        private void UpdateSecond()
+        {
+            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+            timer.Enabled = true;
+            timer.Tick += UpdateSecondTimer;
+            timer.Interval = 1000;
+            timer.Start();
+        }
+        private void UpdateSecondTimer(object sender, EventArgs e)
+        {
+            WorkTimeSecond = SystemInfo.GetPcWorkTimeSecond();
+        }
         private void UpdateTemerature()
         {
             do
             {
-                CPUtemperature = SystemInfo.GetCPUTemperature();
-                GPUtemperature = SystemInfo.GetGPUTemerature();
+                CPUtemperature = SystemInfo.GetTemperature().Item1;
+                GPUtemperature = SystemInfo.GetTemperature().Item2;
             }
             while (!cts.IsCancellationRequested);
         }
@@ -115,15 +156,31 @@ namespace ModuleMain.ViewModels
         }
         private void Shutdown()
         {
+            PutData(SystemUri, StatusUri, ClientId, false);
             SystemControl.halt(false, false);
         }
         private void Restart()
         {
+            PutData(SystemUri, StatusUri, ClientId, false);
             SystemControl.halt(true, false);
         }
         private void Sleep()
         {
-            SystemControl.Sleep(false, false, false);
+            Thread sleepthread = new Thread(() =>
+            {
+                PutData(SystemUri, StatusUri, ClientId, false);
+                SystemControl.Sleep(false, false, false);
+                Thread.Sleep(10000);
+                PutData(SystemUri, StatusUri, ClientId, true);
+            });
+            sleepthread.Name = "sleepthread";
+            sleepthread.Start();
+        }
+
+        private void PutData(string systemuri, string statusuri, string id, bool status)
+        {
+            Put.PutData(systemuri, id, CreateJson.CreateDataJson(new ClassesLibrary.DataModels.SystemDataModel(), id));
+            Put.PutData(statusuri, id, CreateJson.CreateDataJson(new ClassesLibrary.DataModels.StatusDataModel(), id, status));
         }
 
         public void ConfirmNavigationRequest(NavigationContext navigationContext, Action<bool> continuationCallback)

@@ -9,14 +9,26 @@ using ResourcesLibrary.Resources.Wallpapers.Classes;
 using System.Diagnostics;
 using System.Security.Principal;
 using System.Reflection;
+using City.Models;
+using Prism.Events;
+using ClassesLibrary.Client;
+using ClassesLibrary.Classes;
+using ClassesLibrary.ServerWork;
+using System.Threading;
+using System.Linq;
+using System.Windows;
+using System.Globalization;
 
 namespace City.ViewModels
 {
     class ShellWindowViewModel : BindableBase
     {
         private readonly IRegionManager _regionManager;
+        IEventAggregator _ea;
         private ObservableCollection<object> _views = new ObservableCollection<object>();
+        private static Mutex InstanceCheckMutex;
         private string _newObject;
+        private static string ClientId { get; set; }
         public DelegateCommand CloseAppCommand { get; private set; }
         public DelegateCommand<string> NavigateCommand { get; set; }
         public ObservableCollection<object> Views
@@ -29,8 +41,24 @@ namespace City.ViewModels
             get { return _newObject; }
             set { _newObject = value; }
         }
-        public ShellWindowViewModel(IRegionManager regionManager)
+        public ShellWindowViewModel(IRegionManager regionManager, IEventAggregator ea)
         {
+            if (!IsProgramStart())
+            {
+                ResourceDictionary Russian = Application.LoadComponent(new Uri("/ResourcesLibrary;component/Resources/Languages/lang.ru-RU.xaml", UriKind.Relative)) as ResourceDictionary;
+                ResourceDictionary English = Application.LoadComponent(new Uri("/ResourcesLibrary;component/Resources/Languages/lang.xaml", UriKind.Relative)) as ResourceDictionary;
+                switch (CultureInfo.InstalledUICulture.Name)
+                {
+                    case "ru-RU":
+                        MessageBox.Show(Russian["m_Anothercopy"].ToString());
+                        break;
+                    default:
+                        MessageBox.Show(English["m_Anothercopy"].ToString());
+                        break;
+                }
+                Process.GetCurrentProcess().Kill();
+            }
+            _ea = ea;
             Wallpapers.Wallpaper = ModuleSettings.Properties.Settings.Default.DefaultWallpaper;
             Languages.Language = ModuleSettings.Properties.Settings.Default.DefaultLanguage;
             CloseAppCommand = new DelegateCommand(CloseApp);
@@ -38,6 +66,14 @@ namespace City.ViewModels
             _regionManager = regionManager;
             _regionManager.Regions.CollectionChanged += Regions_CollectionChanged;
             RunAsAdministartor();
+        }
+        private bool IsProgramStart()
+        {
+            var currentProc = Process.GetCurrentProcess();
+            string processName = currentProc.ProcessName;
+            bool isNew;
+            InstanceCheckMutex = new Mutex(true, processName, out isNew);
+            return isNew;
         }
         private void Regions_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
@@ -61,10 +97,21 @@ namespace City.ViewModels
         }
         private void Navigate(string navigatePath)
         {
+
             if (navigatePath != null)
             {
                 if (NewObject != navigatePath)
                     _regionManager.RequestNavigate("ContentRegion", navigatePath);
+            }
+            if(navigatePath == "ControlView")
+            {
+                _ea.GetEvent<SendIdEvent>().Publish(Id());
+                _ea.GetEvent<SendSystemUriEvent>().Publish(Properties.Settings.Default.SystemUri);
+                _ea.GetEvent<SendStatusUriEvent>().Publish(Properties.Settings.Default.StatusUri);
+            }
+            if(navigatePath == "MobileView")
+            {
+                _ea.GetEvent<SendIdEvent>().Publish(Id());
             }
         }
         private bool IsRunAsAdministrator()
@@ -90,8 +137,25 @@ namespace City.ViewModels
                 Environment.Exit(0);
             }
         }
+        private static string Id()
+        {
+            if (Properties.Settings.Default.FirstStart)
+            {
+                Properties.Settings.Default.ClientId = GenerateClientId.Id();
+                ClientId = Properties.Settings.Default.ClientId;
+                Properties.Settings.Default.FirstStart = false;
+                Properties.Settings.Default.Save();
+            }
+            else
+            {
+                ClientId = Properties.Settings.Default.ClientId;
+            }
+            return ClientId;
+        }
+        ShellModel shellModel = new ShellModel(Id());
         private void CloseApp()
         {
+            Put.PutData(Properties.Settings.Default.StatusUri, ClientId, CreateJson.CreateDataJson(new ClassesLibrary.DataModels.StatusDataModel(), ClientId, false));
             Environment.Exit(0);
         }
     }

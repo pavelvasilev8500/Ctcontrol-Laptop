@@ -27,4 +27,6 @@
     <v:String x:Key="m_s">s</v:String>
     <v:String x:Key="m_Autostart">Add to autostart</v:String>
     <v:String x:Key="m_ShowSeconds">Show seconds</v:String>
+    <v:String x:Key="m_QRDescription">Scan QR-code using mobile application CtcontrolMobile to connect to your pc.</v:String>
+    <v:String x:Key="m_Anothercopy">You cannot run multiple copies of the program.</v:String>
 </ResourceDictionary>
