@@ -1,6 +1,8 @@
 # CtcontrolNew
 Ctcontrol is a gadget for Windows OS, that can help you to see information aboult your pc and control it.
+
 It contain 3 buttons to control you pc
+
 | ![Component 175](https://user-images.githubusercontent.com/61418223/159235026-b9d2e77e-2381-434e-a017-314ebda3f75c.png) | ![Ellipse 91](https://user-images.githubusercontent.com/61418223/159234949-df3eff9d-22b3-4106-8a0f-fe56a63d5652.png) | ![Component 176](https://user-images.githubusercontent.com/61418223/159235003-a095157f-ccdf-42b8-a756-b854b8430307.png) |
 | -------- | ----- | ----- |
 | Shutdown | Reset | Sleep |  
@@ -15,4 +17,7 @@ It contain 3 buttons to control you pc
 ![image 129](https://user-images.githubusercontent.com/61418223/157874227-0f9eeb24-61ac-4c12-89fc-2a3bb939bc4b.png)
 ![image 130](https://user-images.githubusercontent.com/61418223/157874229-97ea8e65-5b72-4f1b-a3ab-f283a2369778.png)
 
-Also awalable mobile app for android devices "Ctcontrol".
+System Requrement
+.NET Framework 4.8.0
+
+Also awalable mobile application for android devices where you can see actual information aboult your pc and control in remotly.
