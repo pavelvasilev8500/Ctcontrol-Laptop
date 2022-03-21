@@ -1,4 +1,4 @@
-# CtcontrolNew
+# Ctcontrol for laptops
 Ctcontrol is a gadget for Windows OS, that can help you to see information aboult your pc and control it.
 
 It contain 3 buttons to control you pc
