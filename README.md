@@ -1,6 +1,9 @@
 # CtcontrolNew
-New version of ctcontrol
-
+Ctcontrol is a gadget for Windows OS, that can help you to see information aboult your pc and control it.
+It contain 3 buttons to control you pc
+|   ![Component 126](https://user-images.githubusercontent.com/61418223/143914815-9a29318b-d53a-4549-8b32-3cf4488816f5.png)    |   ![Component 127](https://user-images.githubusercontent.com/61418223/143914891-c1bf42fd-e3f0-4595-bd72-03ee75d5e964.png)   |   ![Component 128](https://user-images.githubusercontent.com/61418223/143914937-a32c59ce-f54c-4e24-b517-14e456312d66.png)  |
+| ------- | ------ | ----- |
+| sleep | poweroff | reset |  
 
 ![image 122](https://user-images.githubusercontent.com/61418223/157874182-0cf99e14-9de2-47ab-a4f7-de981cc1f2a6.png)
 ![image 123](https://user-images.githubusercontent.com/61418223/157874193-2a5491d1-624b-4fed-af71-47b68cf45848.png)
@@ -11,3 +14,5 @@ New version of ctcontrol
 ![image 128](https://user-images.githubusercontent.com/61418223/157874223-720b9bf1-7561-4a9e-8253-fcb995b14cef.png)
 ![image 129](https://user-images.githubusercontent.com/61418223/157874227-0f9eeb24-61ac-4c12-89fc-2a3bb939bc4b.png)
 ![image 130](https://user-images.githubusercontent.com/61418223/157874229-97ea8e65-5b72-4f1b-a3ab-f283a2369778.png)
+
+Also awalable mobile app for android devices "Ctcontrol".
