@@ -14,7 +14,8 @@ namespace ResourcesLibrary.Resources.Wallpapers.Classes
             "MonoGrayTheme",
             "MonoBlueTheme",
             "BlackTheme",
-            "BlackDrawableTheme"
+            "BlackDrawableTheme",
+            "DarkBeeDrawableTheme"
         };
         public static List<string> All_Wallpapers
         {
@@ -65,6 +66,11 @@ namespace ResourcesLibrary.Resources.Wallpapers.Classes
                         ResourceDictionary BlackDrawableTheme = Application.LoadComponent(new Uri("/ResourcesLibrary;component/Resources/Themes/BlackDrawableTheme.xaml", UriKind.Relative)) as ResourceDictionary;
                         Application.Current.Resources.Clear();
                         Application.Current.Resources.MergedDictionaries.Add(BlackDrawableTheme);
+                        break;
+                    case "DarkBeeDrawableTheme":
+                        ResourceDictionary DarkBeeDrawableTheme = Application.LoadComponent(new Uri("/ResourcesLibrary;component/Resources/Themes/DarkBeeDrawableTheme.xaml", UriKind.Relative)) as ResourceDictionary;
+                        Application.Current.Resources.Clear();
+                        Application.Current.Resources.MergedDictionaries.Add(DarkBeeDrawableTheme);
                         break;
                 }
             }

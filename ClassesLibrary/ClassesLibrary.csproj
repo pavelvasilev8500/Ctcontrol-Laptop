@@ -56,6 +56,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\SendBoolEvent.cs" />
     <Compile Include="Classes\SendEvent.cs" />
     <Compile Include="Classes\SendIdEvent.cs" />
     <Compile Include="Classes\SendLanguageEvent.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Client\CreateJson.cs" />
     <Compile Include="Client\GenerateClientId.cs" />
     <Compile Include="DataModels\ClientDataModel.cs" />
+    <Compile Include="DataModels\DesktopClientDataModel.cs" />
     <Compile Include="DataModels\StatusDataModel.cs" />
     <Compile Include="DataModels\SystemDataModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

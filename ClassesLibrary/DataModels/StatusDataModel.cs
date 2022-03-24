@@ -4,5 +4,6 @@
     {
         public string _id { get; set; }
         public bool Status { get; set; }
+        public string PCType { get; set; }
     }
 }

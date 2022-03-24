@@ -15,9 +15,9 @@ using ClassesLibrary.Client;
 using ClassesLibrary.Classes;
 using ClassesLibrary.ServerWork;
 using System.Threading;
-using System.Linq;
 using System.Windows;
 using System.Globalization;
+using System.Windows.Forms;
 
 namespace City.ViewModels
 {
@@ -29,6 +29,7 @@ namespace City.ViewModels
         private static Mutex InstanceCheckMutex;
         private string _newObject;
         private static string ClientId { get; set; }
+        private static bool IsLaptop { get; set; }
         public DelegateCommand CloseAppCommand { get; private set; }
         public DelegateCommand<string> NavigateCommand { get; set; }
         public ObservableCollection<object> Views
@@ -45,15 +46,15 @@ namespace City.ViewModels
         {
             if (!IsProgramStart())
             {
-                ResourceDictionary Russian = Application.LoadComponent(new Uri("/ResourcesLibrary;component/Resources/Languages/lang.ru-RU.xaml", UriKind.Relative)) as ResourceDictionary;
-                ResourceDictionary English = Application.LoadComponent(new Uri("/ResourcesLibrary;component/Resources/Languages/lang.xaml", UriKind.Relative)) as ResourceDictionary;
+                ResourceDictionary Russian = System.Windows.Application.LoadComponent(new Uri("/ResourcesLibrary;component/Resources/Languages/lang.ru-RU.xaml", UriKind.Relative)) as ResourceDictionary;
+                ResourceDictionary English = System.Windows.Application.LoadComponent(new Uri("/ResourcesLibrary;component/Resources/Languages/lang.xaml", UriKind.Relative)) as ResourceDictionary;
                 switch (CultureInfo.InstalledUICulture.Name)
                 {
                     case "ru-RU":
-                        MessageBox.Show(Russian["m_Anothercopy"].ToString());
+                        System.Windows.MessageBox.Show(Russian["m_Anothercopy"].ToString());
                         break;
                     default:
-                        MessageBox.Show(English["m_Anothercopy"].ToString());
+                        System.Windows.MessageBox.Show(English["m_Anothercopy"].ToString());
                         break;
                 }
                 Process.GetCurrentProcess().Kill();
@@ -108,6 +109,7 @@ namespace City.ViewModels
                 _ea.GetEvent<SendIdEvent>().Publish(Id());
                 _ea.GetEvent<SendSystemUriEvent>().Publish(Properties.Settings.Default.SystemUri);
                 _ea.GetEvent<SendStatusUriEvent>().Publish(Properties.Settings.Default.StatusUri);
+                _ea.GetEvent<SendBoolEvent>().Publish(IsPcLaptop());
             }
             if(navigatePath == "MobileView")
             {
@@ -152,7 +154,19 @@ namespace City.ViewModels
             }
             return ClientId;
         }
-        ShellModel shellModel = new ShellModel(Id());
+        private static bool IsPcLaptop()
+        {
+            if (SystemInformation.PowerStatus.BatteryChargeStatus == BatteryChargeStatus.NoSystemBattery || SystemInformation.PowerStatus.BatteryChargeStatus == BatteryChargeStatus.Unknown)
+            {
+                IsLaptop = false;
+            }
+            else
+            {
+                IsLaptop = true;
+            }
+            return IsLaptop;
+        }
+        ShellModel shellModel = new ShellModel(Id(), IsPcLaptop());
         private void CloseApp()
         {
             Put.PutData(Properties.Settings.Default.StatusUri, ClientId, CreateJson.CreateDataJson(new ClassesLibrary.DataModels.StatusDataModel(), ClientId, false));

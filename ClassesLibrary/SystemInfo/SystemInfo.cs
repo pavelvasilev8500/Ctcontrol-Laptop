@@ -26,6 +26,21 @@ namespace ClassesLibrary.SystemInfo
                     return string.Format(now.ToString("dd ") + $"{now.ToString("Y", CultureInfo.GetCultureInfo("en-US"))}");
             }
         }
+        public static string GetDateNumber()
+        {
+            DateTime now = DateTime.Now;
+            return now.ToString("dd");
+        }
+        public static string GetDateMonth()
+        {
+            DateTime now = DateTime.Now;
+            return now.ToString("MMMM");
+        }
+        public static string GetDateYear()
+        {
+            DateTime now = DateTime.Now;
+            return now.ToString("yyyy");
+        }
         public static string GetStandartTime()
         {
             return DateTime.Now.ToString("HH:mm");

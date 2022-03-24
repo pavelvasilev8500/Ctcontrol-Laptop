@@ -136,11 +136,13 @@
                            FontWeight="Regular"
                            FontSize="10"/>
                 <TextBlock Text="{Binding Batary}"
+                           Visibility="{Binding BatteryVisibility}"
                            Foreground="White"
                            FontFamily="Segoe UI Symbol"
                            FontWeight="Regular"
                            FontSize="13"/>
                 <TextBlock Text="{DynamicResource m_BatteryCharge}"
+                           Visibility="{Binding BatteryVisibility}"
                            Foreground="White"
                            FontFamily="Segoe UI Symbol"
                            FontWeight="Regular"

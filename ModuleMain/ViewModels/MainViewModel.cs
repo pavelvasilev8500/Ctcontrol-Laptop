@@ -6,6 +6,7 @@ using System;
 using Prism.Events;
 using ClassesLibrary.Classes;
 using System.Windows;
+using System.Windows.Forms;
 
 namespace ModuleMain.ViewModels
 {
@@ -24,6 +25,8 @@ namespace ModuleMain.ViewModels
         private string _cputemperature;
         private string _gputemperature;
         private Visibility _secondVisibility;
+        private Visibility _batteryVisibility;
+        private bool IsLaptop { get; set; }
         public string Date
         {
             get { return _date; }
@@ -90,6 +93,17 @@ namespace ModuleMain.ViewModels
                 SetProperty(ref _secondVisibility, value);
             }
         }
+        public Visibility BatteryVisibility
+        {
+            get
+            {
+                return _batteryVisibility;
+            }
+            set
+            {
+                SetProperty(ref _batteryVisibility, value);
+            }
+        }
         public bool KeepAlive
         {
             get { return false; }
@@ -99,9 +113,24 @@ namespace ModuleMain.ViewModels
         {
             _ea = ea;
             _ea.GetEvent<SendEvent>().Subscribe(MessageReceived);
+            _ea.GetEvent<SendBoolEvent>().Subscribe(BoolMessageRecived);
             ThreadController();
             SecondVisibility = Properties.Settings.Default.DefultSecondVisibility;
+            if (SystemInformation.PowerStatus.BatteryChargeStatus == BatteryChargeStatus.NoSystemBattery || SystemInformation.PowerStatus.BatteryChargeStatus == BatteryChargeStatus.Unknown)
+            {
+                _batteryVisibility = Visibility.Hidden;
+            }
+            else
+            {
+                _batteryVisibility = Visibility.Visible;
+            }
         }
+
+        private void BoolMessageRecived(bool islaptop)
+        {
+            IsLaptop = islaptop;
+        }
+
         private void MessageReceived(Visibility visibility)
         {
             Properties.Settings.Default.DefultSecondVisibility = visibility;

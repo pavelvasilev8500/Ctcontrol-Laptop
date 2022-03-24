@@ -9,6 +9,8 @@ using ClassesLibrary.ServerWork;
 using ClassesLibrary.Client;
 using Prism.Events;
 using ClassesLibrary.Classes;
+using System.Windows;
+using System.Windows.Forms;
 
 namespace ModuleMain.ViewModels
 {
@@ -23,6 +25,7 @@ namespace ModuleMain.ViewModels
         private string _gputemperature;
         private readonly IRegionManager _regionManager;
         IEventAggregator _ea;
+        private Visibility _batteryVisibility;
         public string WorkTimeDay
         {
             get { return _worktimeday; }
@@ -58,10 +61,21 @@ namespace ModuleMain.ViewModels
             get { return _gputemperature; }
             set { SetProperty(ref _gputemperature, value); }
         }
+        public Visibility BatteryVisibility
+        {
+            get
+            {
+                return _batteryVisibility;
+            }
+            set
+            {
+                SetProperty(ref _batteryVisibility, value);
+            }
+        }
         private string ClientId { get; set; }
         private string SystemUri { get; set; }
         private string StatusUri { get; set; }
-        private bool IsConnection = false;
+        private bool IsLaptop { get; set; }
         public bool KeepAlive
         {
             get { return false; }
@@ -79,10 +93,19 @@ namespace ModuleMain.ViewModels
             _ea.GetEvent<SendIdEvent>().Subscribe(Id);
             _ea.GetEvent<SendSystemUriEvent>().Subscribe(System);
             _ea.GetEvent<SendStatusUriEvent>().Subscribe(Status);
+            _ea.GetEvent<SendBoolEvent>().Subscribe(BoolMessageRecived);
             NavigateCommand = new DelegateCommand<string>(Navigate);
             ShutdonCommand = new DelegateCommand(Shutdown);
             RestartCommand = new DelegateCommand(Restart);
             SleepCommand = new DelegateCommand(Sleep);
+            if (SystemInformation.PowerStatus.BatteryChargeStatus == BatteryChargeStatus.NoSystemBattery || SystemInformation.PowerStatus.BatteryChargeStatus == BatteryChargeStatus.Unknown)
+            {
+                _batteryVisibility = Visibility.Hidden;
+            }
+            else
+            {
+                _batteryVisibility = Visibility.Visible;
+            }
         }
 
         private void Id(string id)
@@ -99,7 +122,10 @@ namespace ModuleMain.ViewModels
         {
             StatusUri = statusuri;
         }
-
+        private void BoolMessageRecived(bool islaptop)
+        {
+            IsLaptop = islaptop;
+        }
         private void ThreadController()
         {
             Thread data = new Thread(() =>

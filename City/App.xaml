@@ -21,6 +21,7 @@
                 <ResourceDictionary Source="pack://application:,,,/ResourcesLibrary;component/Resources/Themes/MonoBlueTheme.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/ResourcesLibrary;component/Resources/Themes/BlackTheme.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/ResourcesLibrary;component/Resources/Themes/BlackDrawableTheme.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/ResourcesLibrary;component/Resources/Themes/DarkBeeDrawableTheme.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/ResourcesLibrary;component/Resources/Styles/ToolTip/ToolTip.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

@@ -11,11 +11,13 @@ namespace City.Models
         private string SystemUri { get; } = Properties.Settings.Default.SystemUri;
         private string ClientUri { get; } = Properties.Settings.Default.ClientUri;
         private string StatusUri { get; } = Properties.Settings.Default.StatusUri;
+        private bool IsLaptop { get; set; }
 
         CancellationTokenSource cts = new CancellationTokenSource();
-        public ShellModel(string id)
+        public ShellModel(string id, bool islaptop)
         {
             ClientId = id;
+            IsLaptop = islaptop;
             ThreadController();
         }
 
@@ -101,7 +103,14 @@ namespace City.Models
 
         private void PostClientData()
         {
-            Post.PostData(ClientUri, CreateJson.CreateDataJson(new ClassesLibrary.DataModels.ClientDataModel(), ClientId));
+            if (IsLaptop)
+            {
+                Post.PostData(ClientUri, CreateJson.CreateDataJson(new ClassesLibrary.DataModels.ClientDataModel(), ClientId));
+            }
+            else
+            {
+                Post.PostData(ClientUri, CreateJson.CreateDataJson(new ClassesLibrary.DataModels.DesktopClientDataModel(), ClientId));
+            }
         }
 
         private void PostStatusData(bool status)
@@ -118,7 +127,14 @@ namespace City.Models
         {
             do
             {
-                Put.PutData(ClientUri, ClientId, CreateJson.CreateDataJson(new ClassesLibrary.DataModels.ClientDataModel(), ClientId));
+                if(IsLaptop)
+                {
+                    Put.PutData(ClientUri, ClientId, CreateJson.CreateDataJson(new ClassesLibrary.DataModels.ClientDataModel(), ClientId));
+                }
+                else
+                {
+                    Put.PutData(ClientUri, ClientId, CreateJson.CreateDataJson(new ClassesLibrary.DataModels.DesktopClientDataModel(), ClientId));
+                }
                 Thread.Sleep(2000);
             }
             while (!cts.IsCancellationRequested);
