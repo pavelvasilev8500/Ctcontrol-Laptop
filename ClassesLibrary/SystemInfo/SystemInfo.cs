@@ -92,6 +92,10 @@ namespace ClassesLibrary.SystemInfo
         {
             return (SystemInformation.PowerStatus.BatteryLifePercent * 100).ToString() + "%";
         }
+        public static float GetNotebookBataryFloat()
+        {
+            return (SystemInformation.PowerStatus.BatteryLifePercent * 100);
+        }
         public static (string, string) GetTemperature()
         {
             try

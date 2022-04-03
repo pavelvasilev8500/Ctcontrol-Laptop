@@ -27,6 +27,13 @@
     <v:String x:Key="m_s">с</v:String>
     <v:String x:Key="m_Autostart">Добавить в автозагрузку</v:String>
     <v:String x:Key="m_ShowSeconds">Показывать секунды</v:String>
-    <v:String x:Key="m_QRDescription">Просканируйте QR-код с помощь приложения CtcontrolMobile для подключения к компьютеру.</v:String>
+    <v:String x:Key="m_QRDescription">Для подключения просканируйте QR-код или введите код доступа в приложении Ctcontrol Mobile</v:String>
+    <v:String x:Key="m_AccessDescription">Код подключения:</v:String>
     <v:String x:Key="m_Anothercopy">Нельзя запустить несколько копий программы.</v:String>
+    <v:String x:Key="m_QRCode">QR-код</v:String>
+    <v:String x:Key="m_AccessCode">Код доступа</v:String>
+    <v:String x:Key="m_WarningTitle">Низкий заряд батареи (9%).</v:String>
+    <v:String x:Key="m_WarningText">Возможно, вам стоит подключить компьютер к сети электропитания.</v:String>
+    <v:String x:Key="m_WarningButton">Закрыть</v:String>
 </ResourceDictionary>
+    

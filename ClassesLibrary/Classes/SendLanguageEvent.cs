@@ -1,4 +1,5 @@
 ﻿using Prism.Events;
+using System;
 
 namespace ClassesLibrary.Classes
 {

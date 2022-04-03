@@ -18,6 +18,8 @@ using System.Threading;
 using System.Windows;
 using System.Globalization;
 using System.Windows.Forms;
+using ClassesLibrary.SystemInfo;
+using WarningDialog.Views;
 
 namespace City.ViewModels
 {
@@ -30,6 +32,7 @@ namespace City.ViewModels
         private string _newObject;
         private static string ClientId { get; set; }
         private static bool IsLaptop { get; set; }
+        private static bool Notification { get; set; } = false;
         public DelegateCommand CloseAppCommand { get; private set; }
         public DelegateCommand<string> NavigateCommand { get; set; }
         public ObservableCollection<object> Views
@@ -42,6 +45,7 @@ namespace City.ViewModels
             get { return _newObject; }
             set { _newObject = value; }
         }
+        CancellationTokenSource cts = new CancellationTokenSource();
         public ShellWindowViewModel(IRegionManager regionManager, IEventAggregator ea)
         {
             if (!IsProgramStart())
@@ -67,6 +71,39 @@ namespace City.ViewModels
             _regionManager = regionManager;
             _regionManager.Regions.CollectionChanged += Regions_CollectionChanged;
             RunAsAdministartor();
+            BatteryCheck();
+        }
+        private void BatteryCheck()
+        {
+            Thread batteryCheck = new Thread(() =>
+            {
+                do
+                {
+                    switch (SystemInformation.PowerStatus.BatteryChargeStatus)
+                    {
+                        case BatteryChargeStatus.Low:
+                            if (Notification == false)
+                            {
+                                if (SystemInfo.GetNotebookBataryFloat() <= 10)
+                                {
+                                    var mw = new MainWindow();
+                                    mw.ShowDialog();
+                                    Notification = true;
+                                }
+                            }
+                            break;
+                        default:
+                            Notification = false;
+                            break;
+                    }
+                    Thread.Sleep(1000);
+                }
+                while (!cts.IsCancellationRequested);
+            });
+            batteryCheck.Name = "BatteryCheckThread";
+            batteryCheck.SetApartmentState(ApartmentState.STA);
+            if (IsLaptop)
+                batteryCheck.Start();
         }
         private bool IsProgramStart()
         {
@@ -167,6 +204,7 @@ namespace City.ViewModels
             return IsLaptop;
         }
         ShellModel shellModel = new ShellModel(Id(), IsPcLaptop());
+
         private void CloseApp()
         {
             Put.PutData(Properties.Settings.Default.StatusUri, ClientId, CreateJson.CreateDataJson(new ClassesLibrary.DataModels.StatusDataModel(), ClientId, false));

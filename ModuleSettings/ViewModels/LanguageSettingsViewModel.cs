@@ -1,5 +1,6 @@
 ﻿using ClassesLibrary.Classes;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 using ResourcesLibrary.Resources.Languages.Classes;
@@ -11,6 +12,7 @@ namespace ModuleSettings.ViewModels
     public class LanguageSettingsViewModel : BindableBase, IRegionMemberLifetime
     {
         private readonly IRegionManager _regionManager;
+        IEventAggregator _ea;
         public List<string> s_Languages { get; set; } = new List<string>();
         public List<CultureInfo> c_Languages { get; set; } = new List<CultureInfo>();
         private string selectedItem;
@@ -37,9 +39,10 @@ namespace ModuleSettings.ViewModels
             get { return false; }
         }
         public DelegateCommand<string> NavigateCommand { get; set; }
-        public LanguageSettingsViewModel(IRegionManager regionManager)
+        public LanguageSettingsViewModel(IRegionManager regionManager, IEventAggregator ea)
         {
             _regionManager = regionManager;
+            _ea = ea;
             NavigateCommand = new DelegateCommand<string>(Navigate);
             if (s_Languages.Count != 0)
             {
@@ -58,6 +61,7 @@ namespace ModuleSettings.ViewModels
         {
             Properties.Settings.Default.DefaultLanguage = Languages.Language;
             Properties.Settings.Default.Save();
+            _ea.GetEvent<SendLanguageEvent>().Publish(Languages.Language);
         }
         private void Navigate(string navigatePath)
         {

@@ -23,6 +23,7 @@
                 <ResourceDictionary Source="pack://application:,,,/ResourcesLibrary;component/Resources/Themes/BlackDrawableTheme.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/ResourcesLibrary;component/Resources/Themes/DarkBeeDrawableTheme.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/ResourcesLibrary;component/Resources/Styles/ToolTip/ToolTip.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/ResourcesLibrary;component/Resources/Styles/Buttons/DialogButton.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

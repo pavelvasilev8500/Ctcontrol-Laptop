@@ -209,6 +209,10 @@
       <Project>{c8daffaf-ae25-4a79-a44e-e83a9efad1d2}</Project>
       <Name>ResourcesLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WarningDialog\WarningDialog.csproj">
+      <Project>{621bdd75-0d60-48a5-aa3f-95556cbe1879}</Project>
+      <Name>WarningDialog</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icon.ico" />

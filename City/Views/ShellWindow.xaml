@@ -12,7 +12,8 @@
         Background="Transparent"
         MaxHeight="300"
         MaxWidth="200"
-        >
+        Height="300"
+        Width="200">
 
     <Border
         CornerRadius="8">
