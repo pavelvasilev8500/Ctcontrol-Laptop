@@ -8,6 +8,7 @@
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
+        Topmost="True"
         MaxHeight="200"
         MaxWidth="520"
         Height="200"
