@@ -1,4 +1,5 @@
 ﻿using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 
@@ -35,9 +36,12 @@ namespace WarningDialog.Views
         {
             do
             {
-                if (SystemInformation.PowerStatus.BatteryChargeStatus == BatteryChargeStatus.Charging)
+                if (SystemInformation.PowerStatus.BatteryChargeStatus == (BatteryChargeStatus.Low | BatteryChargeStatus.Charging))
                 {
-                    this.Close();
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        this.Close();
+                    });
                 }
                 Thread.Sleep(1000);
             }
