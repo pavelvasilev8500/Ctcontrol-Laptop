@@ -14,12 +14,40 @@
         MaxWidth="200"
         Height="300"
         Width="200">
+    <Window.Resources>
+        <Storyboard x:Key="BorderStoryboard" RepeatBehavior="Forever" AutoReverse="True">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" Storyboard.TargetName="rectangle">
+                <EasingColorKeyFrame KeyTime="0" Value="Red"/>
+                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FFFF7400"/>
+                <EasingColorKeyFrame KeyTime="0:0:1" Value="#FFFFDC00"/>
+                <EasingColorKeyFrame KeyTime="0:0:1.5" Value="#FFB900FF"/>
+                <EasingColorKeyFrame KeyTime="0:0:2" Value="#FF51FF00"/>
+                <EasingColorKeyFrame KeyTime="0:0:2.5" Value="#FF003AFF"/>
+                <EasingColorKeyFrame KeyTime="0:0:3" Value="#FF00FFFF"/>
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource BorderStoryboard}"/>
+        </EventTrigger>
+    </Window.Triggers>
 
     <Border
         CornerRadius="8">
         <Grid>
             <Image
                 Style="{DynamicResource WallPaper}"/>
+            <Rectangle x:Name="rectangle" Fill="#00F4F4F5" Height="300" Margin="0" RadiusY="8" RadiusX="8" Stroke="Red" VerticalAlignment="Top" StrokeThickness="5" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="200">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-0.11"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
             <ContentControl
                 prism:RegionManager.RegionName="ContentRegion"/>
             <StackPanel Orientation="Horizontal"
@@ -48,7 +76,7 @@
                             Style="{DynamicResource ApplicationButton}"
                             Command="{Binding NavigateCommand}" 
                             CommandParameter="MainSettingsView">
-                                <Image Source="{DynamicResource SettingsIcon}"/>
+                        <Image Source="{DynamicResource SettingsIcon}"/>
                     </Button>
                     <Button Height="15"
                             Width="15"
@@ -56,10 +84,10 @@
                             ToolTip="{DynamicResource m_CloseButton}"
                             Style="{DynamicResource ApplicationButton}"
                             Command="{Binding CloseAppCommand}">
-                                <Image Source="{DynamicResource CloseAppIcon}"/>
+                        <Image Source="{DynamicResource CloseAppIcon}"/>
                     </Button>
-                    </StackPanel>
-                    <Button Height="20"
+                </StackPanel>
+                <Button Height="20"
                             Width="15"
                             Margin="0 0 0 5"
                             ToolTip="{DynamicResource m_MobileButton}"
@@ -67,15 +95,15 @@
                             Command="{Binding NavigateCommand}" 
                             CommandParameter="MobileView">
                     <Image Source="{DynamicResource MobileIcon}"/>
-                    </Button>
-                    <Button Height="20"
+                </Button>
+                <Button Height="20"
                             Width="35"
                             ToolTip="{DynamicResource m_PCButton}"
                             Style="{DynamicResource ApplicationButton}"
                             Command="{Binding NavigateCommand}" 
                             CommandParameter="ControlView">
-                                <Image Source="{DynamicResource NotebookIcon}"/>
-                    </Button>
+                    <Image Source="{DynamicResource NotebookIcon}"/>
+                </Button>
             </StackPanel>
         </Grid>
     </Border>

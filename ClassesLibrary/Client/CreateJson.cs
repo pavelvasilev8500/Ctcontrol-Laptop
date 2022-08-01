@@ -65,7 +65,7 @@ namespace ClassesLibrary.Client
         {
             if (SystemInformation.PowerStatus.BatteryChargeStatus == BatteryChargeStatus.NoSystemBattery || SystemInformation.PowerStatus.BatteryChargeStatus == BatteryChargeStatus.Unknown)
             {
-                PcType = "Desktop";
+                PcType = "PC";
             }
             else
             {
