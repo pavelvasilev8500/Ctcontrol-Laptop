@@ -12,132 +12,117 @@
     <Grid>
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top">
-                <Button Height="15"
-                        Width="15"
-                        Margin="8 3 0 0"
-                        ToolTip="{DynamicResource m_BackButton}"
-                        Style="{DynamicResource ControlButton}"
-                        Command="{Binding NavigateCommand}" 
-                        CommandParameter="MainSettingsView">
-                    <Image Source="{DynamicResource ArrowIcon}"/>
-                </Button>
-
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Margin="5 25 0 0">
+                <Grid>
+                    <Border CornerRadius="4" 
+                    Background="White" 
+                    Height="65" 
+                    Width="65"
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top" 
+                    Margin="10 0 0 0"
+                    Opacity="0.4">
+                    </Border>
+                    <Border CornerRadius="4" 
+                    Background="Transparent" 
+                    Height="65" 
+                    Width="65"
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top" 
+                    Margin="10 0 0 0"
+                    Opacity="1"
+                    BorderThickness="1"
+                    BorderBrush="White">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="4" 
+                                      Direction="270" 
+                                      Opacity="0.625" 
+                                      BlurRadius="6"/>
+                        </Border.Effect>
+                    </Border>
+                    <Image Source="{DynamicResource WallpaperIcon}"
+                   Height="50"
+                   Width="50"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="17 12 0 0">
+                        <Image.Effect>
+                            <DropShadowEffect ShadowDepth="1" 
+                                      Direction="270" 
+                                      Opacity="0.625" 
+                                      BlurRadius="6"/>
+                        </Image.Effect>
+                    </Image>
+                </Grid>
+                <TextBlock Text="{DynamicResource m_WallpaperButton}"
+                       TextWrapping="WrapWithOverflow"
+                       MaxWidth="100"
+                       VerticalAlignment="Center"
+                               Margin="35 0 0 0"
+                               Foreground="White"
+                               FontSize="15"/>
             </StackPanel>
-            <TextBlock Text="{DynamicResource m_WallpaperButton}"
-                       Margin="20 20 0 0"
-                       Foreground="White"
-                       FontFamily="Segoe UI Symbol"
-                       FontWeight="Regular"
-                       FontSize="13"/>
             <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Margin="0 20 0 0">
-                <Button Height="20"
+                        HorizontalAlignment="Center">
+                <Grid Height="150"
+                      VerticalAlignment="Bottom">
+                    <Border BorderThickness="1"
+                            BorderBrush="White"
+                            Background="Transparent"
+                            Height="22"
+                            Width="22"
+                            Margin="5 0 0 0"
+                            CornerRadius="20"/>
+                    <Button Height="20"
                         Width="20" 
+                        Margin="20 0 15 0"
                         ToolTip="{DynamicResource m_Previous}"
                         Style="{DynamicResource ControlButton}"
                         Command="{Binding PreviousCommand}">
-                    <Image Source="{DynamicResource LeftArrowIcon}"/>
+                    <Image Source="{DynamicResource LeftSimpleArrowIcon}"
+                           Height="15"
+                           Margin="0 0 2 0"/>
                 </Button>
-                <Button Height="20"
-                        Width="20"
-                        Margin="20 0 20 0" 
-                        ToolTip="{DynamicResource m_Apply}"
-                        Style="{DynamicResource ControlButton}"
-                        Command="{Binding ApplyCommand}">
-                    <Image Source="{DynamicResource AcceptIcon}"/>
-                </Button>
-                <Button Height="20"
+                </Grid>
+                <Grid Height="150" 
+                      Margin="0 20 0 0">
+                    <Border CornerRadius="4" 
+                                Background="White" 
+                                Height="150" 
+                                Width="110"
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Center" 
+                                Margin="0 0 0 0"
+                                Opacity="0.4">
+                    </Border>
+                    <Image Height="140"
+                           Width="100"
+                           Stretch="Fill"
+                            Style="{DynamicResource WallPaper}"/>
+                </Grid>
+                <Grid Height="150"
+                      VerticalAlignment="Bottom">
+                    <Border BorderThickness="1"
+                            BorderBrush="White"
+                            Background="Transparent"
+                            Height="22"
+                            Width="22"
+                            Margin="0 0 5 0"
+                            CornerRadius="20"/>
+                    <Button Height="20"
                         Width="20" 
+                        Margin="15 0 20 0"
                         ToolTip="{DynamicResource m_Next}"
                         Style="{DynamicResource ControlButton}"
                         Command="{Binding NextCommand}">
-                    <Image Source="{DynamicResource RightArrowIcon}"/>
+                    <Image Source="{DynamicResource RightSimpleArrowIcon}"
+                           Height="15"
+                           Margin="2 0 0 0"/>
                 </Button>
-            </StackPanel>
-            <Grid Height="120" 
-                  Margin="0 30 0 0">
-                <Image Style="{DynamicResource WallPaper}"/>
-                <Grid Height="120"
-                      Width="80">
-                    <StackPanel Orientation="Vertical"
-                    Margin="5 5 0 0">
-                        <TextBlock Text="01 Марта 2008" 
-                       Foreground="White"
-                       FontFamily="Segoe UI Symbol"
-                       FontWeight="Regular"
-                       FontSize="7"/>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="15:45"
-                           Foreground="White"
-                           FontFamily="Segoe UI Symbol"
-                           FontWeight="Regular"
-                           FontSize="15"
-                           Margin="0 0 2 0"/>
-                            <TextBlock Text="32"
-                           VerticalAlignment="Bottom"
-                           Margin="0 0 0 0"
-                           Foreground="White"
-                           FontFamily="Segoe UI Symbol"
-                           FontWeight="Regular"
-                           FontSize="8"/>
-                        </StackPanel>
-                        <TextBlock Text="Суббота"
-                       Margin="0 0 0 2"
-                       Foreground="White"
-                       FontFamily="Segoe UI Symbol"
-                       FontWeight="Regular"
-                       FontSize="5"/>
-                        <TextBlock Text="0D 3h 2m 31s"
-                       Foreground="White"
-                       FontFamily="Segoe UI Symbol"
-                       FontWeight="Regular"
-                       FontSize="5"/>
-                        <TextBlock Text="{DynamicResource m_WorkTime}"
-                       Margin="0 0 0 10"
-                       Foreground="White"
-                       FontFamily="Segoe UI Symbol"
-                       FontWeight="Regular"
-                       FontSize="5"/>
-                        <TextBlock Text="34"
-                       Foreground="White"
-                       FontFamily="Segoe UI Symbol"
-                       FontWeight="Regular"
-                       FontSize="5"/>
-                        <TextBlock Text="{DynamicResource m_CPUTemperature}"
-                       Margin="0 0 0 5"
-                       Foreground="White"
-                       FontFamily="Segoe UI Symbol"
-                       FontWeight="Regular"
-                       FontSize="5"/>
-                        <TextBlock Text="38"
-                       Foreground="White"
-                       FontFamily="Segoe UI Symbol"
-                       FontWeight="Regular"
-                       FontSize="5"/>
-                        <TextBlock Text="{DynamicResource m_GPUTemperature}"
-                       Margin="0 0 0 5"
-                       Foreground="White"
-                       FontFamily="Segoe UI Symbol"
-                       FontWeight="Regular"
-                       FontSize="5"/>
-                        <TextBlock Text="50%"
-                       Foreground="White"
-                       FontFamily="Segoe UI Symbol"
-                       FontWeight="Regular"
-                       FontSize="5"/>
-                        <TextBlock Text="{DynamicResource m_BatteryCharge}"
-                       Foreground="White"
-                       FontFamily="Segoe UI Symbol"
-                       FontWeight="Regular"
-                       FontSize="5"/>
-                    </StackPanel>
-
                 </Grid>
-            </Grid>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>

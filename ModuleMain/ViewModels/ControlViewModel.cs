@@ -98,14 +98,6 @@ namespace ModuleMain.ViewModels
             ShutdonCommand = new DelegateCommand(Shutdown);
             RestartCommand = new DelegateCommand(Restart);
             SleepCommand = new DelegateCommand(Sleep);
-            if (SystemInformation.PowerStatus.BatteryChargeStatus == BatteryChargeStatus.NoSystemBattery || SystemInformation.PowerStatus.BatteryChargeStatus == BatteryChargeStatus.Unknown)
-            {
-                _batteryVisibility = Visibility.Hidden;
-            }
-            else
-            {
-                _batteryVisibility = Visibility.Visible;
-            }
         }
 
         private void Id(string id)
@@ -125,6 +117,10 @@ namespace ModuleMain.ViewModels
         private void BoolMessageRecived(bool islaptop)
         {
             IsLaptop = islaptop;
+            if (IsLaptop)
+                _batteryVisibility = Visibility.Visible;
+            else
+                _batteryVisibility = Visibility.Hidden;
         }
         private void ThreadController()
         {

@@ -1,8 +1,12 @@
 ﻿using ClassesLibrary.Classes;
 using Prism.Events;
+using System;
 using System.IO;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Drawing;
 
 namespace ModuleMobile.Views
 {
@@ -12,6 +16,8 @@ namespace ModuleMobile.Views
     public partial class MobileView : UserControl
     {
         IEventAggregator _ea;
+        TranslateTransform translate = new TranslateTransform();
+        private bool _switch { get; set; } = true;
         public MobileView(IEventAggregator ea)
         {
             InitializeComponent();
@@ -40,6 +46,26 @@ namespace ModuleMobile.Views
                 bitmapimage.CacheOption = BitmapCacheOption.OnLoad;
                 bitmapimage.EndInit();
                 QR.Source = bitmapimage;
+            }
+        }
+
+        private void Switcher(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if(_switch)
+            {
+                _switch = false;
+                SwitcherButton.RenderTransform = translate;
+                var converter = new System.Windows.Media.BrushConverter(); 
+                //SwitcherColor.Background = (System.Windows.Media.Brush)converter.ConvertFromString("#FFFFFFFF");
+                translate.BeginAnimation(TranslateTransform.XProperty, new DoubleAnimation(0, 10, TimeSpan.FromMilliseconds(300)));
+            }
+            else
+            {
+                _switch = true;
+                SwitcherButton.RenderTransform = translate;
+                var converter = new System.Windows.Media.BrushConverter();
+                //SwitcherColor.Background = (System.Windows.Media.Brush)converter.ConvertFromString("#FFFFFFFF");
+                translate.BeginAnimation(TranslateTransform.XProperty, new DoubleAnimation(10, 0, TimeSpan.FromMilliseconds(300)));
             }
         }
     }

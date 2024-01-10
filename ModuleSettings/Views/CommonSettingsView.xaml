@@ -12,27 +12,60 @@
     <Grid>
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top">
-                <Button Height="15"
-                        Width="15"
-                        Margin="8 3 0 0"
-                        ToolTip="{DynamicResource m_BackButton}"
-                        Style="{DynamicResource ControlButton}"
-                        Command="{Binding NavigateCommand}" 
-                        CommandParameter="MainSettingsView">
-                    <Image Source="{DynamicResource ArrowIcon}"/>
-                </Button>
-
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Margin="5 40 0 0">
+                <Grid>
+                    <Border CornerRadius="4" 
+                    Background="White" 
+                    Height="65" 
+                    Width="65"
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top" 
+                    Margin="10 0 0 0"
+                    Opacity="0.4">
+                    </Border>
+                    <Border CornerRadius="4" 
+                    Background="Transparent" 
+                    Height="65" 
+                    Width="65"
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top" 
+                    Margin="10 0 0 0"
+                    Opacity="1"
+                    BorderThickness="1"
+                    BorderBrush="White">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="4" 
+                                      Direction="270" 
+                                      Opacity="0.625" 
+                                      BlurRadius="6"/>
+                        </Border.Effect>
+                    </Border>
+                    <Image Source="{DynamicResource CommonIcon}"
+                   Height="50"
+                   Width="50"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="17 15 0 0">
+                        <Image.Effect>
+                            <DropShadowEffect ShadowDepth="1" 
+                                      Direction="270" 
+                                      Opacity="0.625" 
+                                      BlurRadius="6"/>
+                        </Image.Effect>
+                    </Image>
+                </Grid>
+                <TextBlock Text="{DynamicResource m_CommonButton}"
+                       TextWrapping="WrapWithOverflow"
+                       MaxWidth="100"
+                       VerticalAlignment="Center"
+                               Margin="25 0 0 0"
+                               Foreground="White"
+                               FontSize="15"/>
             </StackPanel>
-            <TextBlock Text="{DynamicResource m_CommonButton}"
-                       Margin="20 20 0 20"
-                       Foreground="White"
-                       FontFamily="Segoe UI Symbol"
-                       FontWeight="Regular"
-                       FontSize="13"/>
             <StackPanel Orientation="Vertical"
-                        Margin="20 0 0 0">
+                        Margin="20 30 0 0">
                 <CheckBox IsThreeState="False" 
                           IsChecked="{Binding AutostartSwitcher}"
                           Content="{DynamicResource m_Autostart}"

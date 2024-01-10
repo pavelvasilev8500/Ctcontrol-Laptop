@@ -63,6 +63,7 @@
     <Compile Include="Classes\SendStatusUriEvent.cs" />
     <Compile Include="Classes\SendStringEvent.cs" />
     <Compile Include="Classes\SendSystemUriEvent.cs" />
+    <Compile Include="Classes\SendVisibleEvent.cs" />
     <Compile Include="Classes\Visitor.cs" />
     <Compile Include="Client\CreateJson.cs" />
     <Compile Include="Client\GenerateClientId.cs" />

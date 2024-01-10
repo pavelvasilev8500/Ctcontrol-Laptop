@@ -10,30 +10,62 @@
              d:Width="200"
              mc:Ignorable="d" >
     <Grid>
-        <StackPanel Orientation="Vertical">
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top">
-                <Button Height="15"
-                        Width="15"
-                        Margin="8 3 0 0"
-                        ToolTip="{DynamicResource m_BackButton}"
-                        Style="{DynamicResource ControlButton}"
-                        Command="{Binding NavigateCommand}" 
-                        CommandParameter="MainSettingsView">
-                    <Image Source="{DynamicResource ArrowIcon}"/>
-                </Button>
-
-            </StackPanel>
+        <StackPanel Orientation="Horizontal"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Margin="5 40 0 0">
+            <Grid>
+                <Border CornerRadius="4" 
+                    Background="White" 
+                    Height="65" 
+                    Width="65"
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top" 
+                    Margin="10 0 0 0"
+                    Opacity="0.4">
+                </Border>
+                <Border CornerRadius="4" 
+                    Background="Transparent" 
+                    Height="65" 
+                    Width="65"
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top" 
+                    Margin="10 0 0 0"
+                    Opacity="1"
+                    BorderThickness="1"
+                    BorderBrush="White">
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="4" 
+                                      Direction="270" 
+                                      Opacity="0.625" 
+                                      BlurRadius="6"/>
+                    </Border.Effect>
+                </Border>
+                <Image Source="{DynamicResource LanguageIcon}"
+                   Height="50"
+                   Width="50"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="17.5 8 0 0">
+                    <Image.Effect>
+                        <DropShadowEffect ShadowDepth="1" 
+                                      Direction="270" 
+                                      Opacity="0.625" 
+                                      BlurRadius="6"/>
+                    </Image.Effect>
+                </Image>
+            </Grid>
             <TextBlock Text="{DynamicResource m_LanguageButton}"
-                       Margin="20 20 0 0"
-                       Foreground="White"
-                       FontFamily="Segoe UI Symbol"
-                       FontWeight="Regular"
-                       FontSize="13"/>
+                       TextWrapping="WrapWithOverflow"
+                       MaxWidth="100"
+                       VerticalAlignment="Center"
+                               Margin="25 0 0 0"
+                               Foreground="White"
+                               FontSize="15"/>
         </StackPanel>
         <ComboBox Height="30" 
                   Width="180" 
+                  Margin="0 50 0 0"
                   IsEditable="False"
                   Style="{DynamicResource ComboBox}"
                   SelectedItem="{Binding SelectedItem}"

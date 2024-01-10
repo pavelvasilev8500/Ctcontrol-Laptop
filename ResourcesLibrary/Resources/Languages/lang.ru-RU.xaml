@@ -6,6 +6,7 @@
 	<v:String x:Key="m_GPUTemperature">Температура видеопроцессора</v:String>
 	<v:String x:Key="m_BatteryCharge">Заряд батари</v:String>
 	<v:String x:Key="m_SystemControl">Контроль сиситемы</v:String>
+    <v:String x:Key="m_HomeControl">Домашняя</v:String>
     <v:String x:Key="m_ShutdownButton">Завершить работу</v:String>
     <v:String x:Key="m_RestartButton">Перезагрузка</v:String>
     <v:String x:Key="m_SleepButton">Спящий режим</v:String>
@@ -19,7 +20,9 @@
     <v:String x:Key="m_WallpaperButton">Обои</v:String>
     <v:String x:Key="m_CommonButton">Общие</v:String>
     <v:String x:Key="m_Next">Следующий</v:String>
+    <v:String x:Key="m_SettingsNext">Далее</v:String>
     <v:String x:Key="m_Previous">Предидущий</v:String>
+    <v:String x:Key="m_SettingsPrevious">Назад</v:String>
     <v:String x:Key="m_Apply">Применить</v:String>
     <v:String x:Key="m_D">Д</v:String>
     <v:String x:Key="m_H">ч</v:String>
@@ -35,5 +38,6 @@
     <v:String x:Key="m_WarningTitle">Низкий заряд батареи (9%).</v:String>
     <v:String x:Key="m_WarningText">Возможно, вам стоит подключить компьютер к сети электропитания.</v:String>
     <v:String x:Key="m_WarningButton">Закрыть</v:String>
+    <v:String x:Key="m_ConnectedDevice">Подключённые устройства</v:String>
 </ResourceDictionary>
     

@@ -11,21 +11,27 @@
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top">
-            <Button Height="15"
-                    Width="15"
-                    Margin="8 3 0 0"
-                    ToolTip="{DynamicResource m_BackButton}"
-                    Style="{DynamicResource ControlButton}"
-                    Command="{Binding NavigateCommand}" 
-                    CommandParameter="MainView">
-                <Image Source="{DynamicResource ArrowIcon}"/>
-            </Button>
         </StackPanel>
+        <Border CornerRadius="4" 
+                Background="White" 
+                Height="33"
+                Width="120"
+                Margin="9 51 0 0"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Opacity="0.365">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="4" 
+                                  Direction="270" 
+                                  Opacity="0.625" 
+                                  BlurRadius="6"/>
+            </Border.Effect>
+        </Border>
         <StackPanel Orientation="Vertical"
                     Margin="10 20 0 0">
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="{DynamicResource m_SystemControl}"
-                           Margin="0 0 0 20"
+                           Margin="0 0 0 15"
                            Foreground="White"
                            FontFamily="Segoe UI Symbol"
                            FontWeight="Regular"
@@ -35,29 +41,53 @@
                             Height="30"
                             Width="30"
                             ToolTip="{DynamicResource m_ShutdownButton}"
-                            Style="{DynamicResource ControlButton}"
+                            Style="{DynamicResource ApplicationButton}"
                             Command="{Binding ShutdonCommand}">
-                        <Image Source="{DynamicResource ShutdownIcon}"/>
+                        <Image Source="{DynamicResource ShutdownIcon}">
+                            <Image.Effect>
+                                <DropShadowEffect ShadowDepth="3"
+                                                Direction="315"
+                                                Color="Black"
+                                                Opacity="0.5"
+                                                BlurRadius="8"/>
+                            </Image.Effect>
+                        </Image>
                     </Button>
                     <Button Margin="0 0 13 0"
                             Height="30"
                             Width="30"                            
                             ToolTip="{DynamicResource m_RestartButton}"
-                            Style="{DynamicResource ControlButton}"
+                            Style="{DynamicResource ApplicationButton}"
                             Command="{Binding RestartCommand}">
-                        <Image Source="{DynamicResource RestartIcon}"/>
+                        <Image Source="{DynamicResource RestartIcon}">
+                            <Image.Effect>
+                                <DropShadowEffect ShadowDepth="3"
+                                            Direction="315"
+                                            Color="Black"
+                                            Opacity="0.5"
+                                            BlurRadius="8"/>
+                            </Image.Effect>
+                        </Image>
                     </Button>
                     <Button Height="30"
                             Width="30"
                             ToolTip="{DynamicResource m_SleepButton}"
-                            Style="{DynamicResource ControlButton}"
+                            Style="{DynamicResource ApplicationButton}"
                             Command="{Binding SleepCommand}">
-                        <Image Source="{DynamicResource SleepIcon}"/>
+                        <Image Source="{DynamicResource SleepIcon}">
+                            <Image.Effect>
+                                <DropShadowEffect ShadowDepth="3"
+                                            Direction="315"
+                                            Color="Black"
+                                            Opacity="0.5"
+                                            BlurRadius="8"/>
+                            </Image.Effect>
+                        </Image>
                     </Button>
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Vertical"
-                        Margin="5 26 0 0">
+                        Margin="5 10 0 0">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{Binding WorkTimeDay}"
                            Margin="0 0 3 0"

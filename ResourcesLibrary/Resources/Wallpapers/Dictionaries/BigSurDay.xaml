@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="WallPaper" TargetType="Image">
+        <Setter Property="Source" Value="/ResourcesLibrary;component/Assets/BigSurDay.png"/>
+    </Style>
+    <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontFamily" Value="Segoe UI Symbol"/>
+        <Setter Property="FontWeight" Value="Regular"/>
+    </Style>
+</ResourceDictionary>

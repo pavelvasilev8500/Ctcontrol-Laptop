@@ -116,19 +116,15 @@ namespace ModuleMain.ViewModels
             _ea.GetEvent<SendBoolEvent>().Subscribe(BoolMessageRecived);
             ThreadController();
             SecondVisibility = Properties.Settings.Default.DefultSecondVisibility;
-            if (SystemInformation.PowerStatus.BatteryChargeStatus == BatteryChargeStatus.NoSystemBattery || SystemInformation.PowerStatus.BatteryChargeStatus == BatteryChargeStatus.Unknown)
-            {
-                _batteryVisibility = Visibility.Hidden;
-            }
-            else
-            {
-                _batteryVisibility = Visibility.Visible;
-            }
         }
 
         private void BoolMessageRecived(bool islaptop)
         {
             IsLaptop = islaptop;
+            if (IsLaptop)
+                _batteryVisibility = Visibility.Visible;
+            else
+                _batteryVisibility = Visibility.Hidden;
         }
 
         private void MessageReceived(Visibility visibility)

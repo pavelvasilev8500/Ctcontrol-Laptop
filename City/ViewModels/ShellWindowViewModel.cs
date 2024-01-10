@@ -7,8 +7,6 @@ using System.Collections.Specialized;
 using ResourcesLibrary.Resources.Languages.Classes;
 using ResourcesLibrary.Resources.Wallpapers.Classes;
 using System.Diagnostics;
-using System.Security.Principal;
-using System.Reflection;
 using City.Models;
 using Prism.Events;
 using ClassesLibrary.Client;
@@ -16,10 +14,10 @@ using ClassesLibrary.Classes;
 using ClassesLibrary.ServerWork;
 using System.Threading;
 using System.Windows;
-using System.Globalization;
 using System.Windows.Forms;
-using ClassesLibrary.SystemInfo;
-using WarningDialog.Views;
+using System.Collections.Generic;
+using City.MainWindowClasses;
+using WarningDialog.Classes;
 
 namespace City.ViewModels
 {
@@ -28,8 +26,10 @@ namespace City.ViewModels
         private readonly IRegionManager _regionManager;
         IEventAggregator _ea;
         private ObservableCollection<object> _views = new ObservableCollection<object>();
-        private static Mutex InstanceCheckMutex;
+        private List<string> _oldViews = new List<string>();
         private string _newObject;
+        private string _oldPage { get; set; }
+        private bool _close { get; set; } = false;
         private static string ClientId { get; set; }
         private static bool IsLaptop { get; set; }
         private static bool Notification { get; set; } = false;
@@ -45,73 +45,50 @@ namespace City.ViewModels
             get { return _newObject; }
             set { _newObject = value; }
         }
+        private Visibility backButtonVisible = Visibility.Hidden;
+        public Visibility BackButtonVisible
+        {
+            get { return backButtonVisible; }
+            set { SetProperty(ref backButtonVisible, value); }
+        }
+        private Visibility mainButtonVisible = Visibility.Visible;
+        public Visibility MainButtonVisible
+        {
+            get { return mainButtonVisible; }
+            set { SetProperty(ref mainButtonVisible, value); }
+        }
+        private Visibility markerVisisbiliry = Visibility.Visible;
+        public Visibility MarkerVivibiliti
+        {
+            get { return markerVisisbiliry; }
+            set { SetProperty(ref markerVisisbiliry, value); }
+        }
+        private string commandNavigationParameter;
+        public string CommandNavigationParameter
+        {
+            get { return commandNavigationParameter; }
+            set { SetProperty(ref commandNavigationParameter, value); }
+        }
+        private bool isButtonEnabled = true;
+        public bool IsButtonEnabled
+        {
+            get { return isButtonEnabled; }
+            set { SetProperty(ref isButtonEnabled, value); }
+        }
         CancellationTokenSource cts = new CancellationTokenSource();
         public ShellWindowViewModel(IRegionManager regionManager, IEventAggregator ea)
         {
-            if (!IsProgramStart())
-            {
-                ResourceDictionary Russian = System.Windows.Application.LoadComponent(new Uri("/ResourcesLibrary;component/Resources/Languages/lang.ru-RU.xaml", UriKind.Relative)) as ResourceDictionary;
-                ResourceDictionary English = System.Windows.Application.LoadComponent(new Uri("/ResourcesLibrary;component/Resources/Languages/lang.xaml", UriKind.Relative)) as ResourceDictionary;
-                switch (CultureInfo.InstalledUICulture.Name)
-                {
-                    case "ru-RU":
-                        System.Windows.MessageBox.Show(Russian["m_Anothercopy"].ToString());
-                        break;
-                    default:
-                        System.Windows.MessageBox.Show(English["m_Anothercopy"].ToString());
-                        break;
-                }
-                Process.GetCurrentProcess().Kill();
-            }
             _ea = ea;
-            Wallpapers.Wallpaper = ModuleSettings.Properties.Settings.Default.DefaultWallpaper;
-            Languages.Language = ModuleSettings.Properties.Settings.Default.DefaultLanguage;
+            IsLaptop = LaptopCheck.IsPcLaptop();
+            new CheckProgramStart(Process.GetCurrentProcess());
+            new RunAsAdministrator();
+            new BatteryCheck();
+            //Wallpapers.Wallpaper = ModuleSettings.Properties.Settings.Default.DefaultWallpaper;
+            //Languages.Language = ModuleSettings.Properties.Settings.Default.DefaultLanguage;
             CloseAppCommand = new DelegateCommand(CloseApp);
             NavigateCommand = new DelegateCommand<string>(Navigate);
             _regionManager = regionManager;
             _regionManager.Regions.CollectionChanged += Regions_CollectionChanged;
-            RunAsAdministartor();
-            BatteryCheck();
-        }
-        private void BatteryCheck()
-        {
-            Thread batteryCheck = new Thread(() =>
-            {
-                do
-                {
-                    switch (SystemInformation.PowerStatus.BatteryChargeStatus)
-                    {
-                        case BatteryChargeStatus.Low:
-                            if (Notification == false)
-                            {
-                                if (SystemInfo.GetNotebookBataryFloat() <= 10)
-                                {
-                                    var mw = new MainWindow();
-                                    mw.ShowDialog();
-                                    Notification = true;
-                                }
-                            }
-                            break;
-                        default:
-                            Notification = false;
-                            break;
-                    }
-                    Thread.Sleep(1000);
-                }
-                while (!cts.IsCancellationRequested);
-            });
-            batteryCheck.Name = "BatteryCheckThread";
-            batteryCheck.SetApartmentState(ApartmentState.STA);
-            if (IsLaptop)
-                batteryCheck.Start();
-        }
-        private bool IsProgramStart()
-        {
-            var currentProc = Process.GetCurrentProcess();
-            string processName = currentProc.ProcessName;
-            bool isNew;
-            InstanceCheckMutex = new Mutex(true, processName, out isNew);
-            return isNew;
         }
         private void Regions_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
@@ -127,6 +104,59 @@ namespace City.ViewModels
             {
                 Views.Add(e.NewItems[0].GetType().Name);
                 NewObject = e.NewItems[0].GetType().Name;
+                if(NewObject == "MainView")
+                {
+                    MarkerVivibiliti = Visibility.Visible;
+                    IsButtonEnabled = true;
+                    _oldViews.Clear();
+                    _oldViews.Add(e.NewItems[0].GetType().Name);
+                }
+                if (NewObject == "ControlView")
+                {
+                    MarkerVivibiliti = Visibility.Visible;
+                    IsButtonEnabled = true;
+                    _oldViews.Clear();
+                    _oldViews.Add(e.NewItems[0].GetType().Name);
+                }
+                if (NewObject == "MobileView")
+                {
+                    MarkerVivibiliti = Visibility.Visible;
+                    IsButtonEnabled = true;
+                    _oldViews.Clear();
+                    _oldViews.Add(e.NewItems[0].GetType().Name);
+                }
+                if (NewObject == "MainSettingsView")
+                {
+                    MarkerVivibiliti = Visibility.Hidden;
+                    MainButtonVisible = Visibility.Hidden;
+                    BackButtonVisible = Visibility.Visible;
+                    IsButtonEnabled = false;
+                    CommandNavigationParameter = _oldViews[_oldViews.Count-1];
+                }
+                if (NewObject == "LanguageSettingsView")
+                {
+                    MarkerVivibiliti = Visibility.Hidden;
+                    MainButtonVisible = Visibility.Hidden;
+                    BackButtonVisible = Visibility.Visible;
+                    IsButtonEnabled = false;
+                    CommandNavigationParameter = "MainSettingsView";
+                }
+                if (NewObject == "WallpaperSettingsView")
+                {
+                    MarkerVivibiliti = Visibility.Hidden;
+                    MainButtonVisible = Visibility.Hidden;
+                    BackButtonVisible = Visibility.Visible;
+                    IsButtonEnabled = false;
+                    CommandNavigationParameter = "MainSettingsView";
+                }
+                if (NewObject == "CommonSettingsView")
+                {
+                    MarkerVivibiliti = Visibility.Hidden;
+                    MainButtonVisible = Visibility.Hidden;
+                    BackButtonVisible = Visibility.Visible;
+                    IsButtonEnabled = false;
+                    CommandNavigationParameter = "MainSettingsView";
+                }
             }
             else if (e.Action == NotifyCollectionChangedAction.Remove)
             {
@@ -141,39 +171,26 @@ namespace City.ViewModels
                 if (NewObject != navigatePath)
                     _regionManager.RequestNavigate("ContentRegion", navigatePath);
             }
+            if(navigatePath == "MainView")
+            {
+                MainButtonVisible = Visibility.Visible;
+                BackButtonVisible = Visibility.Hidden;
+                _ea.GetEvent<SendBoolEvent>().Publish(IsLaptop);
+            }
             if(navigatePath == "ControlView")
             {
+                MainButtonVisible = Visibility.Visible;
+                BackButtonVisible = Visibility.Hidden;
                 _ea.GetEvent<SendIdEvent>().Publish(Id());
                 _ea.GetEvent<SendSystemUriEvent>().Publish(Properties.Settings.Default.SystemUri);
                 _ea.GetEvent<SendStatusUriEvent>().Publish(Properties.Settings.Default.StatusUri);
-                _ea.GetEvent<SendBoolEvent>().Publish(IsPcLaptop());
+                _ea.GetEvent<SendBoolEvent>().Publish(IsLaptop);
             }
             if(navigatePath == "MobileView")
             {
+                MainButtonVisible = Visibility.Visible;
+                BackButtonVisible = Visibility.Hidden;
                 _ea.GetEvent<SendIdEvent>().Publish(Id());
-            }
-        }
-        private bool IsRunAsAdministrator()
-        {
-            var wi = WindowsIdentity.GetCurrent();
-            var wp = new WindowsPrincipal(wi);
-            return wp.IsInRole(WindowsBuiltInRole.Administrator);
-        }
-        private void RunAsAdministartor()
-        {
-            if (!IsRunAsAdministrator())
-            {
-                var processInfo = new ProcessStartInfo(Assembly.GetExecutingAssembly().CodeBase);
-                processInfo.UseShellExecute = true;
-                processInfo.Verb = "runas";
-                try
-                {
-                    Process.Start(processInfo);
-                }
-                catch (Exception)
-                {
-                }
-                Environment.Exit(0);
             }
         }
         private static string Id()
@@ -191,19 +208,7 @@ namespace City.ViewModels
             }
             return ClientId;
         }
-        private static bool IsPcLaptop()
-        {
-            if (SystemInformation.PowerStatus.BatteryChargeStatus == BatteryChargeStatus.NoSystemBattery || SystemInformation.PowerStatus.BatteryChargeStatus == BatteryChargeStatus.Unknown)
-            {
-                IsLaptop = false;
-            }
-            else
-            {
-                IsLaptop = true;
-            }
-            return IsLaptop;
-        }
-        ShellModel shellModel = new ShellModel(Id(), IsPcLaptop());
+        //ShellModel shellModel = new ShellModel(Id(), IsLaptop);
 
         private void CloseApp()
         {

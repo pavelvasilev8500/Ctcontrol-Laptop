@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style x:Key="SettingsButton" TargetType="Button">
-        <Setter Property="BorderBrush" Value="#005FB8"/>
+        <Setter Property="BorderBrush" Value="White"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -10,16 +10,44 @@
                             BorderThickness="{TemplateBinding BorderThickness}"
                             Height="{TemplateBinding Height}"
                             Width="{TemplateBinding Width}"
-                            Opacity="0.65"
-                            Background="#678AAC"
+                            Opacity="1"
+                            Background="Transparent"
                             CornerRadius="4">
-                        <ContentControl Margin="{TemplateBinding Padding}"
-                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                        Content="{TemplateBinding Content}" />
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="4" 
+                                          Direction="270" 
+                                          Opacity="0.625" 
+                                          BlurRadius="6"/>
+                        </Border.Effect>
+                        <Grid>
+                            <Border Background="White"
+                                    BorderThickness="0"
+                                    Height="{TemplateBinding Height}"
+                                    Width="{TemplateBinding Width}"
+                                    CornerRadius="4"
+                                    Opacity="0.4"/>
+                            <ContentControl Margin="{TemplateBinding Padding}"
+                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                            Content="{TemplateBinding Content}" >
+                                <ContentControl.Effect>
+                                        <DropShadowEffect ShadowDepth="4" 
+                                          Direction="270" 
+                                          Opacity="0.625" 
+                                          BlurRadius="6"/>
+                                </ContentControl.Effect>
+                            </ContentControl>
+                        </Grid>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 </ResourceDictionary>
+
+<!--<Border.Effect>
+    <DropShadowEffect ShadowDepth="4" 
+                                      Direction="270" 
+                                      Opacity="0.625" 
+                                      BlurRadius="6"/>
+</Border.Effect>-->

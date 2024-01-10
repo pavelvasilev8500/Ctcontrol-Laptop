@@ -1,6 +1,9 @@
-﻿using Prism.Commands;
+﻿using ClassesLibrary.Classes;
+using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
+using System.Windows;
 
 namespace ModuleSettings.ViewModels
 {

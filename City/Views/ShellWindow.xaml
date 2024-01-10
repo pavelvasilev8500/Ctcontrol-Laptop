@@ -4,107 +4,420 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:prism="http://prismlibrary.com/" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         prism:ViewModelLocator.AutoWireViewModel="True"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         Title="Ctcontrol"
         ResizeMode="NoResize"
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
-        MaxHeight="300"
-        MaxWidth="200"
-        Height="300"
-        Width="200">
-    <Window.Resources>
-        <Storyboard x:Key="BorderStoryboard" RepeatBehavior="Forever" AutoReverse="True">
-            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)" Storyboard.TargetName="rectangle">
-                <EasingColorKeyFrame KeyTime="0" Value="Red"/>
-                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FFFF7400"/>
-                <EasingColorKeyFrame KeyTime="0:0:1" Value="#FFFFDC00"/>
-                <EasingColorKeyFrame KeyTime="0:0:1.5" Value="#FFB900FF"/>
-                <EasingColorKeyFrame KeyTime="0:0:2" Value="#FF51FF00"/>
-                <EasingColorKeyFrame KeyTime="0:0:2.5" Value="#FF003AFF"/>
-                <EasingColorKeyFrame KeyTime="0:0:3" Value="#FF00FFFF"/>
-            </ColorAnimationUsingKeyFrames>
-        </Storyboard>
-    </Window.Resources>
-    <Window.Triggers>
-        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-            <BeginStoryboard Storyboard="{StaticResource BorderStoryboard}"/>
-        </EventTrigger>
-    </Window.Triggers>
+        MaxHeight="320"
+        MaxWidth="205"
+        Height="320"
+        Width="205">
 
-    <Border
-        CornerRadius="8">
+    <Grid >
+        
+        <Border Name="mask" 
+                Background="White" 
+                CornerRadius="8"/>
         <Grid>
-            <Image
-                Style="{DynamicResource WallPaper}"/>
-            <Rectangle x:Name="rectangle" Fill="#00F4F4F5" Height="300" Margin="0" RadiusY="8" RadiusX="8" Stroke="Red" VerticalAlignment="Top" StrokeThickness="5" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="200">
-                <Rectangle.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="-0.11"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Rectangle.RenderTransform>
-            </Rectangle>
-            <ContentControl
-                prism:RegionManager.RegionName="ContentRegion"/>
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Top">
-                <Button Height="13"
-                        Width="36"
-                        VerticalAlignment="Top"
-                        ToolTip="{DynamicResource m_MoveButton}"
-                        Style="{DynamicResource ApplicationButton}"
-                        PreviewMouseLeftButtonDown="Button_Move">
-                    <Image Source="{DynamicResource MoveIcon}"/>
+            <Grid.OpacityMask>
+                <VisualBrush Visual="{Binding ElementName=mask}"/>
+            </Grid.OpacityMask>
+            <Image Stretch="Fill" 
+                   Style="{DynamicResource WallPaper}"/>
+        </Grid>
+
+        <Border CornerRadius="8,8,0,0" 
+                Background="White" 
+                Height="20" 
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Top" 
+                Opacity="0.465">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="4" 
+                                  Direction="270" 
+                                  Opacity="0.625" 
+                                  BlurRadius="6"/>
+            </Border.Effect>
+        </Border>
+
+        <Border CornerRadius="4" 
+                Background="White" 
+                Height="30"
+                Width="170"
+                Margin="5"
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Bottom" 
+                Opacity="0.465">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="4" 
+                                  Direction="270" 
+                                  Opacity="0.625" 
+                                  BlurRadius="6"/>
+            </Border.Effect>
+        </Border>
+        <Grid x:Name="ButtonsGrid" 
+            Background="Transparent"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Bottom"
+              Height="30"
+              Width="170"
+              Margin="5">
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Height="30">
+            <Button x:Name="Home"
+                    Height="20"
+                    Margin="0 0 30 0"
+                    Padding="0"
+                    HorizontalAlignment="Left"
+                    IsEnabled="{Binding IsButtonEnabled}"
+                    ToolTip="{DynamicResource m_HomeControl}"
+                    Style="{DynamicResource ApplicationButton}"
+                    Click="Main_Click"
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="MainView">
+                <Image Source="{DynamicResource HomeIcon}">
+                    <Image.Effect>
+                        <DropShadowEffect ShadowDepth="3"
+                                            Direction="315"
+                                            Color="Black"
+                                            Opacity="0.5"
+                                            BlurRadius="8"/>
+                    </Image.Effect>
+                </Image>
+            </Button>
+            <Button x:Name="Control"
+                    Height="20"
+                    HorizontalAlignment="Left"
+                    Margin="0 0 30 0"
+                    IsEnabled="{Binding IsButtonEnabled}"
+                    ToolTip="{DynamicResource m_SystemControl}"
+                    Style="{DynamicResource ApplicationButton}"
+                    Click="Laptop_Click"
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="ControlView">
+                    <Image x:Name="RotateImage" 
+                    Source="{DynamicResource LaptopIcon}">
+                        <Image.Effect>
+                            <DropShadowEffect ShadowDepth="3"
+                                            Direction="315"
+                                            Color="Black"
+                                            Opacity="0.5"
+                                            BlurRadius="8"/>
+                        </Image.Effect>
+                    </Image>
                 </Button>
-            </StackPanel>
-            <StackPanel Orientation="Vertical"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Top"
-                        Margin="0 3 8 0">
-                <StackPanel Orientation="Horizontal"
-                            Margin="0 0 0 5">
-                    <Button Height="15"
-                            Width="15"
-                            Margin="0 0 5 0"
-                            VerticalAlignment="Top"
-                            ToolTip="{DynamicResource m_SettingsButton}"
-                            Style="{DynamicResource ApplicationButton}"
-                            Command="{Binding NavigateCommand}" 
-                            CommandParameter="MainSettingsView">
-                        <Image Source="{DynamicResource SettingsIcon}"/>
-                    </Button>
-                    <Button Height="15"
-                            Width="15"
-                            VerticalAlignment="Top"
-                            ToolTip="{DynamicResource m_CloseButton}"
+            <Button x:Name="Mobile"
+                    Height="20"
+                    HorizontalAlignment="Left"
+                    IsEnabled="{Binding IsButtonEnabled}"
+                    ToolTip="{DynamicResource m_MobileButton}"
+                    Style="{DynamicResource ApplicationButton}"
+                    Click="Mobile_Click"
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="MobileView">
+                <Image Source="{DynamicResource MobileIcon}">
+                    <Image.Effect>
+                        <DropShadowEffect ShadowDepth="3"
+                                            Direction="315"
+                                            Color="Black"
+                                            Opacity="0.5"
+                                            BlurRadius="8"/>
+                    </Image.Effect>
+                </Image>
+            </Button>
+        </StackPanel>
+            <Border x:Name="Marcker"
+                    Visibility="{Binding MarkerVivibiliti}"
+                CornerRadius="4" 
+                Background="White" 
+                Height="25"
+                Width="35"
+                Margin="13 0 0 0"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center" 
+                Opacity="0.3">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="4" 
+                                  Direction="270" 
+                                  Opacity="0.625" 
+                                  BlurRadius="6"/>
+                </Border.Effect>
+            </Border>
+        </Grid>
+
+
+        <ContentControl Margin="0 10 0 10"
+                        prism:RegionManager.RegionName="ContentRegion">
+        </ContentControl>
+
+        <materialDesign:DrawerHost Height="300"
+                                   Width="200"
+                                   VerticalAlignment="Top"
+                                   TopDrawerCloseOnClickAway="True"
+                                   OverlayBackground="Transparent">
+            <materialDesign:DrawerHost.TopDrawerContent>
+                <materialDesign:Card Margin="5 25 0 0"
+                                     Background="White" 
+                                     Opacity="0.7"
+                                     HorizontalAlignment="Left"
+                                     UniformCornerRadius="4">
+                    <Button Height="20"
+                            Width="20"
+                            Padding="5"
+                            HorizontalAlignment="Left"
                             Style="{DynamicResource ApplicationButton}"
                             Command="{Binding CloseAppCommand}">
                         <Image Source="{DynamicResource CloseAppIcon}"/>
                     </Button>
-                </StackPanel>
-                <Button Height="20"
-                            Width="15"
-                            Margin="0 0 0 5"
-                            ToolTip="{DynamicResource m_MobileButton}"
+                </materialDesign:Card>
+            </materialDesign:DrawerHost.TopDrawerContent>
+            <StackPanel Margin="5 0 5 0"
+                        Height="20"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Top">
+                <Grid HorizontalAlignment="Left">
+                    <Button Visibility="{Binding MainButtonVisible}"
                             Style="{DynamicResource ApplicationButton}"
-                            Command="{Binding NavigateCommand}" 
-                            CommandParameter="MobileView">
-                    <Image Source="{DynamicResource MobileIcon}"/>
+                            Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                            CommandParameter="{x:Static Dock.Top}">
+                        <TextBlock Text="Ctcontrol"
+                                   Foreground="White"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                    </Button>
+
+                    <Button Visibility="{Binding BackButtonVisible}" 
+                        HorizontalAlignment="Left"
+                        Height="15"
+                        Width="15"
+                        ToolTip="{DynamicResource m_BackButton}"
+                        Style="{DynamicResource ControlButton}"
+                        Command="{Binding NavigateCommand}" 
+                        CommandParameter="{Binding CommandNavigationParameter}">
+                        <Image Source="{DynamicResource ArrowIcon}"/>
+                    </Button>
+                </Grid>
+
+                <Grid Width="60" 
+                      Background="Transparent"
+                      PreviewMouseLeftButtonDown="Drag_Move"/>
+                <Button Height="15"
+                        Width="20"
+                        HorizontalAlignment="Left"
+                        Style="{DynamicResource ApplicationButton}"
+                        Click="Switcher"
+                        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                        CommandParameter="{x:Static Dock.Right}">
+                    <StackPanel Orientation="Vertical"
+                            VerticalAlignment="Center">
+                        <Grid>
+                            <Border 
+                    CornerRadius="2.5" 
+                    Background="Transparent" 
+                    Height="6" 
+                    Width="11"
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Bottom" 
+                    Margin="0 0 0 0"
+                    Opacity="1"
+                    BorderThickness="1"
+                    BorderBrush="White">
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="4" 
+                                      Direction="270" 
+                                      Opacity="0.625" 
+                                      BlurRadius="6"/>
+                                </Border.Effect>
+                            </Border>
+                            <Border   x:Name="Swither1"
+            CornerRadius="10" 
+                    Background="White" 
+                    Height="3" 
+                    Width="3"
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Bottom" 
+                    Margin="0 0 6 1.5"
+                    Opacity="1"
+                    BorderThickness="1"
+                    BorderBrush="White">
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="4" 
+                                      Direction="270" 
+                                      Opacity="0.625" 
+                                      BlurRadius="6"/>
+                                </Border.Effect>
+                            </Border>
+                            <Border 
+                    CornerRadius="2.5" 
+                    Background="Transparent" 
+                    Height="6" 
+                    Width="11"
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Bottom" 
+                    Margin="0 0 0 0"
+                    Opacity="1"
+                    BorderThickness="1"
+                    BorderBrush="White">
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="4" 
+                                      Direction="270" 
+                                      Opacity="0.625" 
+                                      BlurRadius="6"/>
+                                </Border.Effect>
+                            </Border>
+                        </Grid>
+                        <Grid Margin="0 1 0 0">
+                            <Border 
+                    CornerRadius="2.5" 
+                    Background="Transparent" 
+                    Height="6" 
+                    Width="11"
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Bottom" 
+                    Margin="0 0 0 0"
+                    Opacity="1"
+                    BorderThickness="1"
+                    BorderBrush="White">
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="4" 
+                                      Direction="270" 
+                                      Opacity="0.625" 
+                                      BlurRadius="6"/>
+                                </Border.Effect>
+                            </Border>
+                            <Border  x:Name="Swither2"
+            CornerRadius="10" 
+                    Background="White" 
+                    Height="3" 
+                    Width="3"
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Bottom" 
+                    Margin="0 0 2 1.5"
+                    Opacity="1"
+                    BorderThickness="1"
+                    BorderBrush="White">
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="4" 
+                                      Direction="270" 
+                                      Opacity="0.625" 
+                                      BlurRadius="6"/>
+                                </Border.Effect>
+                            </Border>
+                            <Border 
+                    CornerRadius="2.5" 
+                    Background="Transparent" 
+                    Height="6" 
+                    Width="11"
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Bottom" 
+                    Margin="0 0 0 0"
+                    Opacity="1"
+                    BorderThickness="1"
+                    BorderBrush="White">
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="4" 
+                                      Direction="270" 
+                                      Opacity="0.625" 
+                                      BlurRadius="6"/>
+                                </Border.Effect>
+                            </Border>
+                        </Grid>
+                    </StackPanel>
                 </Button>
-                <Button Height="20"
-                            Width="35"
-                            ToolTip="{DynamicResource m_PCButton}"
-                            Style="{DynamicResource ApplicationButton}"
-                            Command="{Binding NavigateCommand}" 
-                            CommandParameter="ControlView">
-                    <Image Source="{DynamicResource NotebookIcon}"/>
+
+                <Button Height="15"
+                        Width="20"
+                        HorizontalAlignment="Left"
+                        ToolTip="{DynamicResource m_SettingsButton}"
+                        Style="{DynamicResource ApplicationButton}"
+                        Command="{Binding NavigateCommand}"
+                        CommandParameter="MainSettingsView">
+                    <Image Source="{DynamicResource SettingsIcon}">
+                        <Image.Effect>
+                            <DropShadowEffect ShadowDepth="3"
+                                                Direction="315"
+                                                Color="Black"
+                                                Opacity="0.5"
+                                                BlurRadius="8"/>
+                        </Image.Effect>
+                    </Image>
                 </Button>
+
+                <Button Height="15"
+                        Width="20"
+                        HorizontalAlignment="Left"
+                        Style="{DynamicResource ApplicationButton}">
+                    <Image Source="{DynamicResource BluetoothIcon}">
+                        <Image.Effect>
+                            <DropShadowEffect ShadowDepth="3"
+                                              Direction="315"
+                                              Color="Black"
+                                              Opacity="0.5"
+                                              BlurRadius="8"/>
+                        </Image.Effect>
+                    </Image>
+                </Button>
+                
+                <Button Height="15"
+                        Width="20"
+                        HorizontalAlignment="Left"
+                        Style="{DynamicResource ApplicationButton}"
+                        Click="Wifi"
+                        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                        CommandParameter="{x:Static Dock.Top}">
+
+                    <Grid Margin="0 0 0 0" 
+                        Height="15"
+                      Width="15">
+                        <StackPanel Orientation="Horizontal"
+                                VerticalAlignment="Bottom"
+                                Margin="0 0 0 0">
+                            <Border x:Name="Wifi1" 
+                                Background="White"
+                                BorderThickness="0"
+                                CornerRadius="1"
+                                VerticalAlignment="Bottom"
+                                Margin="0 0 1 2"
+                                Width="3"
+                                Height="7"/>
+                            <Border x:Name="Wifi2" 
+                                Background="White"
+                                BorderThickness="0"
+                                CornerRadius="1"
+                                VerticalAlignment="Bottom"
+                                Margin="0 0 1 2"
+                                Width="3"
+                                Height="9"/>
+                            <Border x:Name="Wifi3" 
+                                Background="White"
+                                BorderThickness="0"
+                                CornerRadius="1"
+                                VerticalAlignment="Bottom"
+                                Margin="0 0 1 2"
+                                Width="3"
+                                Height="11"/>
+                            <Border x:Name="Wifi4" 
+                                Background="White"
+                                BorderThickness="0"
+                                CornerRadius="1"
+                                VerticalAlignment="Bottom"
+                                Margin="0 0 0 2"
+                                Width="3"
+                                Height="13"/>
+                        </StackPanel>
+                    </Grid>
+                </Button>
+
             </StackPanel>
-        </Grid>
-    </Border>
+
+        </materialDesign:DrawerHost>
+
+    </Grid>
+
 </Window>

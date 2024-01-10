@@ -10,6 +10,7 @@
                     Grid.ColumnSpan="2"
                     CornerRadius="4"
                     Background="WhiteSmoke"
+                    Opacity="0.4"
                     BorderThickness="1" />
             <Border Grid.Column="1"
                     Margin="4"
@@ -28,7 +29,7 @@
         <Border x:Name="PART_ContentHost" 
                 Focusable="False" 
                 Background="{TemplateBinding Background}"
-                HorizontalAlignment="Center"/>
+                HorizontalAlignment="Left"/>
     </ControlTemplate>
     <Style x:Key="ComboBox" TargetType="ComboBox">
         <Setter Property="SnapsToDevicePixels" Value="true"/>
@@ -41,7 +42,7 @@
         <Setter Property="FontFamily" Value="Segoe UI Symbol"/>
         <Setter Property="FontWeight" Value="Regular"/>
         <Setter Property="FontSize" Value="13"/>
-        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Foreground" Value="White"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ComboBox">
@@ -72,9 +73,10 @@
                                   MinWidth="{TemplateBinding ActualWidth}"
                                   MaxHeight="{TemplateBinding MaxDropDownHeight}">
                                 <Border x:Name="DropDownBorder"
-                                            Background="WhiteSmoke"/>
+                                            Background="White"
+                                        Opacity="0.4"/>
                                 <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
-                                    <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                    <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained"/>
                                 </ScrollViewer>
                             </Grid>
                         </Popup>
@@ -116,7 +118,8 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" TargetName="Border" Value="#147BDB"/>
+                            <Setter Property="Background" TargetName="Border" Value="#005FB8"/>
+                            <Setter Property="Opacity" TargetName="Border" Value="0.8"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -1,0 +1,135 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--#region Gray-->
+    <DrawingImage x:Key="LinerGrayWallpaper">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V300 H200 V0 H0 Z">
+                <GeometryDrawing>
+                    <GeometryDrawing.Brush>
+                        <LinearGradientBrush StartPoint="100,0" EndPoint="100,300" MappingMode="Absolute" SpreadMethod="Pad" Opacity="1">
+                            <GradientStop Color="#D97C9BA5" Offset="0.33" />
+                            <GradientStop Color="#D9939BA4" Offset="0.686667" />
+                        </LinearGradientBrush>
+                    </GeometryDrawing.Brush>
+                    <GeometryDrawing.Geometry>
+                        <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,200,300" />
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+    <!--#endregion-->
+    <!--#region Blue-->
+    <DrawingImage x:Key="LinerBlueWallpaper">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V300 H200 V0 H0 Z">
+                <GeometryDrawing>
+                    <GeometryDrawing.Brush>
+                        <LinearGradientBrush StartPoint="100,0" EndPoint="100,300" MappingMode="Absolute" SpreadMethod="Pad" Opacity="1">
+                            <GradientStop Color="#E63868FA" Offset="0.0766667" />
+                            <GradientStop Color="#E635B6FA" Offset="0.376667" />
+                            <GradientStop Color="#E690B4CF" Offset="0.816667" />
+                        </LinearGradientBrush>
+                    </GeometryDrawing.Brush>
+                    <GeometryDrawing.Geometry>
+                        <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,200,300" />
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+    <!--#endregion-->
+    <!--#region Black-->
+    <DrawingImage x:Key="MonoBlack">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V300 H200 V0 H0 Z">
+                <GeometryDrawing>
+                    <GeometryDrawing.Brush>
+                        <SolidColorBrush Color="#FF000000" Opacity="0.8" />
+                    </GeometryDrawing.Brush>
+                    <GeometryDrawing.Geometry>
+                        <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,200,300" />
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+                <GeometryDrawing Geometry="F1 M200,300z M0,0z M0.5,148.994C84.5,24.4941,37.5,260.5,159.5,299.494">
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="#FFFF0000" Thickness="1" StartLineCap="Round" EndLineCap="Round" LineJoin="Miter" MiterLimit="1" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+                <GeometryDrawing Geometry="F1 M200,300z M0,0z M0.5,147.5C85,24,39,260.505,161,299.5">
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="#FFBD00FF" Thickness="1" StartLineCap="Round" EndLineCap="Round" LineJoin="Miter" MiterLimit="1" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+                <GeometryDrawing Geometry="F1 M200,300z M0,0z M0.5,146.001C87,23.5001,38,261,163,299.501">
+                    <GeometryDrawing.Pen>
+                        <Pen Brush="#FF7C2016" Thickness="1" StartLineCap="Round" EndLineCap="Round" LineJoin="Miter" MiterLimit="1" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+    <!--#endregion-->
+    <!--#region MonoBlue-->
+    <DrawingImage x:Key="MonoBlue">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V300 H200 V0 H0 Z">
+                <GeometryDrawing>
+                    <GeometryDrawing.Brush>
+                        <SolidColorBrush Color="#FF3868FA" Opacity="0.75" />
+                    </GeometryDrawing.Brush>
+                    <GeometryDrawing.Geometry>
+                        <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,200,300" />
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+    <!--#endregion-->
+    <!--#region MonoLightGray-->
+    <DrawingImage x:Key="MonoGray">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V300 H200 V0 H0 Z">
+                <GeometryDrawing>
+                    <GeometryDrawing.Brush>
+                        <SolidColorBrush Color="#FFC9D6DD" Opacity="0.75" />
+                    </GeometryDrawing.Brush>
+                    <GeometryDrawing.Geometry>
+                        <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,200,300" />
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+    <!--#endregion-->
+    <!--#region  BlackDrawable-->
+    <DrawingImage x:Key="BlackDrawable">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V300 H200 V0 H0 Z">
+                <DrawingGroup Opacity="1">
+                    <DrawingGroup.ClipGeometry>
+                        <PathGeometry FillRule="Nonzero" Figures="M0,7.99999C0,3.58171,3.58172,0,8,0L192,0C196.418,0,200,3.58172,200,8L200,292C200,296.418,196.418,300,192,300L8,300C3.58173,300,0,296.418,0,292L0,7.99999z" />
+                    </DrawingGroup.ClipGeometry>
+                    <GeometryDrawing Brush="#FFFFFFFF" Geometry="F1 M200,300z M0,0z M0,7.99999C0,3.58171,3.58172,0,8,0L192,0C196.418,0,200,3.58172,200,8L200,292C200,296.418,196.418,300,192,300L8,300C3.58173,300,0,296.418,0,292L0,7.99999z" />
+                    <GeometryDrawing Brush="#FF1F222A">
+                        <GeometryDrawing.Geometry>
+                            <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,200,300" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="#FF171A20" Geometry="F1 M200,300z M0,0z M89.0882,113L22,113 168.079,300 200,300 200,253.781 89.0882,113z" />
+                    <DrawingGroup Opacity="1">
+                        <GeometryDrawing Brush="#FF367BF0" Geometry="F1 M200,300z M0,0z M90.3894,17.519L22.7327,17.519 164,198 164,111.752 90.3894,17.519z" />
+                        <GeometryDrawing Brush="#FF367BF0" Geometry="F1 M200,300z M0,0z M0,85.6652L23.8152,116.012 91.4719,116.012 0,0 0,85.6652z" />
+                    </DrawingGroup>
+                    <DrawingGroup Opacity="1">
+                        <GeometryDrawing Brush="#FF272A34" Geometry="F1 M200,300z M0,0z M171,300L0,82 0,171.327 101.193,300 171,300z" />
+                    </DrawingGroup>
+                    <GeometryDrawing Brush="#FF1D1F27" Geometry="F1 M200,300z M0,0z M84.2567,300L101.5,300 0,171 0,193.921 84.2567,300z" />
+                    <GeometryDrawing Brush="#FF191C23" Geometry="F1 M200,300z M0,0z M0,199.3L0,194 85,300 80.641,300 0,199.3z" />
+                    <GeometryDrawing Brush="#FF1F222A" Geometry="F1 M200,300z M0,0z M80.7188,300L0,199 0,300 80.7188,300z" />
+                </DrawingGroup>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+    <!--#endregion-->
+</ResourceDictionary>

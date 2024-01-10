@@ -6,6 +6,7 @@
     <v:String x:Key="m_GPUTemperature">GPU temperature</v:String>
     <v:String x:Key="m_BatteryCharge">Battery charge</v:String>
     <v:String x:Key="m_SystemControl">System control</v:String>
+    <v:String x:Key="m_HomeControl">Home</v:String>
     <v:String x:Key="m_ShutdownButton">Shut down</v:String>
     <v:String x:Key="m_RestartButton">Restart</v:String>
     <v:String x:Key="m_SleepButton">Sleep</v:String>
@@ -19,7 +20,9 @@
     <v:String x:Key="m_WallpaperButton">Wallpaper</v:String>
     <v:String x:Key="m_CommonButton">Common</v:String>
     <v:String x:Key="m_Next">Next</v:String>
+    <v:String x:Key="m_SettingsNext">Next</v:String>
     <v:String x:Key="m_Previous">Previous</v:String>
+    <v:String x:Key="m_SettingsPrevious">Previous</v:String>
     <v:String x:Key="m_Apply">Apply</v:String>
     <v:String x:Key="m_D">D</v:String>
     <v:String x:Key="m_H">h</v:String>
@@ -35,4 +38,5 @@
     <v:String x:Key="m_WarningTitle">Your battery is running low (9%).</v:String>
     <v:String x:Key="m_WarningText">You might want to plug in your PC.</v:String>
     <v:String x:Key="m_WarningButton">Close</v:String>
+    <v:String x:Key="m_ConnectedDevice">Connected devices</v:String>
 </ResourceDictionary>

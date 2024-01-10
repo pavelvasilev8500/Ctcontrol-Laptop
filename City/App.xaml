@@ -6,24 +6,16 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/ResourcesLibrary;component/Resources/Languages/lang.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/ResourcesLibrary;component/Resources/Languages/lang.ru-RU.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/ResourcesLibrary;component/Resources/Wallpapers/Wallpaper.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/ResourcesLibrary;component/Resources/Images/ImagesIcons.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/ResourcesLibrary;component/Resources/Styles/Buttons/ControlButtons.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/ResourcesLibrary;component/Resources/Styles/Buttons/ApplicationButton.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/ResourcesLibrary;component/Resources/Styles/Buttons/ApplicationButtons.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/ResourcesLibrary;component/Resources/Styles/Buttons/SettingsButtons.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/ResourcesLibrary;component/Resources/Styles/ComboBoxes/LanguageComboBox.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/ResourcesLibrary;component/Resources/Styles/CheckBoxes/CommonCheckBox.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/ResourcesLibrary;component/Resources/Themes/GrayTheme.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/ResourcesLibrary;component/Resources/Themes/BlueTheme.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/ResourcesLibrary;component/Resources/Themes/MonoLightGrayTheme.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/ResourcesLibrary;component/Resources/Themes/MonoBlueTheme.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/ResourcesLibrary;component/Resources/Themes/BlackTheme.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/ResourcesLibrary;component/Resources/Themes/BlackDrawableTheme.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/ResourcesLibrary;component/Resources/Themes/DarkBeeDrawableTheme.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/ResourcesLibrary;component/Resources/Styles/ToolTip/ToolTip.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/ResourcesLibrary;component/Resources/Styles/Buttons/DialogButton.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

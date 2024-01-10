@@ -6,7 +6,7 @@
       <Value Profile="(Default)">en-US</Value>
     </Setting>
     <Setting Name="DefaultWallpaper" Type="System.String" Scope="User">
-      <Value Profile="(Default)">GrayTheme</Value>
+      <Value Profile="(Default)">BigSurDay</Value>
     </Setting>
     <Setting Name="DefaultAutorun" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

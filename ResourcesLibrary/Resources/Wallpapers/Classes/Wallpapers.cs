@@ -6,71 +6,44 @@ namespace ResourcesLibrary.Resources.Wallpapers.Classes
 {
     public static class Wallpapers
     {
-        private static string wallpaper;
-        private static List<string> m_Wallpapers = new List<string>()
+        private static string _wallpaper;
+        private static ResourceDictionary BigSurDay = Application.LoadComponent(new Uri("/ResourcesLibrary;component/Resources/Wallpapers/Dictionaries/BigSurDay.xaml", UriKind.Relative)) as ResourceDictionary;
+        private static ResourceDictionary BigSurNight = Application.LoadComponent(new Uri("/ResourcesLibrary;component/Resources/Wallpapers/Dictionaries/BigSurNight.xaml", UriKind.Relative)) as ResourceDictionary;
+
+        public static List<string> m_Wallpapers = new List<string>()
         {
-            "GrayTheme",
-            "BlueTheme",
-            "MonoGrayTheme",
-            "MonoBlueTheme",
-            "BlackTheme",
-            "BlackDrawableTheme",
-            "DarkBeeDrawableTheme"
+            "BigSurDay",
+            "BigSurNight",
         };
-        public static List<string> All_Wallpapers
-        {
-            get
-            {
-                return m_Wallpapers;
-            }
-        }
+
         public static string Wallpaper
         {
             get
             {
-                return wallpaper;
+                return _wallpaper;
             }
             set
             {
                 if (value == null) throw new ArgumentNullException("value");
-                if (value == wallpaper) return;
-                wallpaper = value;
-                switch (wallpaper)
+                if (value == _wallpaper) return;
+                var oldwall = _wallpaper;
+                _wallpaper = value;
+                switch (_wallpaper)
                 {
-                    case "GrayTheme":
-                        ResourceDictionary GrayTheme = Application.LoadComponent(new Uri("/ResourcesLibrary;component/Resources/Themes/GrayTheme.xaml", UriKind.Relative)) as ResourceDictionary;
-                        Application.Current.Resources.Clear();
-                        Application.Current.Resources.MergedDictionaries.Add(GrayTheme);
+                    case "BigSurDay":
+                        Application.Current.Resources.MergedDictionaries.Add(BigSurDay);
                         break;
-                    case "BlueTheme":
-                        ResourceDictionary BlueTheme = Application.LoadComponent(new Uri("/ResourcesLibrary;component/Resources/Themes/BlueTheme.xaml", UriKind.Relative)) as ResourceDictionary;
-                        Application.Current.Resources.Clear();
-                        Application.Current.Resources.MergedDictionaries.Add(BlueTheme);
+                    case "BigSurNight":
+                        Application.Current.Resources.MergedDictionaries.Add(BigSurNight);
                         break;
-                    case "MonoGrayTheme":
-                        ResourceDictionary MonoGrayTheme = Application.LoadComponent(new Uri("/ResourcesLibrary;component/Resources/Themes/MonoLightGrayTheme.xaml", UriKind.Relative)) as ResourceDictionary;
-                        Application.Current.Resources.Clear();
-                        Application.Current.Resources.MergedDictionaries.Add(MonoGrayTheme);
+                }
+                switch(oldwall)
+                {
+                    case "BigSurDay":
+                        Application.Current.Resources.MergedDictionaries.Remove(BigSurDay);
                         break;
-                    case "MonoBlueTheme":
-                        ResourceDictionary MonoBlueTheme = Application.LoadComponent(new Uri("/ResourcesLibrary;component/Resources/Themes/MonoBlueTheme.xaml", UriKind.Relative)) as ResourceDictionary;
-                        Application.Current.Resources.Clear();
-                        Application.Current.Resources.MergedDictionaries.Add(MonoBlueTheme);
-                        break;
-                    case "BlackTheme":
-                        ResourceDictionary BlackTheme = Application.LoadComponent(new Uri("/ResourcesLibrary;component/Resources/Themes/BlackTheme.xaml", UriKind.Relative)) as ResourceDictionary;
-                        Application.Current.Resources.Clear();
-                        Application.Current.Resources.MergedDictionaries.Add(BlackTheme);
-                        break;
-                    case "BlackDrawableTheme":
-                        ResourceDictionary BlackDrawableTheme = Application.LoadComponent(new Uri("/ResourcesLibrary;component/Resources/Themes/BlackDrawableTheme.xaml", UriKind.Relative)) as ResourceDictionary;
-                        Application.Current.Resources.Clear();
-                        Application.Current.Resources.MergedDictionaries.Add(BlackDrawableTheme);
-                        break;
-                    case "DarkBeeDrawableTheme":
-                        ResourceDictionary DarkBeeDrawableTheme = Application.LoadComponent(new Uri("/ResourcesLibrary;component/Resources/Themes/DarkBeeDrawableTheme.xaml", UriKind.Relative)) as ResourceDictionary;
-                        Application.Current.Resources.Clear();
-                        Application.Current.Resources.MergedDictionaries.Add(DarkBeeDrawableTheme);
+                    case "BigSurNight":
+                        Application.Current.Resources.MergedDictionaries.Remove(BigSurNight);
                         break;
                 }
             }
