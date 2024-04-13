@@ -6,7 +6,6 @@ using System;
 using Prism.Events;
 using ClassesLibrary.Classes;
 using System.Windows;
-using System.Windows.Forms;
 
 namespace ModuleMain.ViewModels
 {

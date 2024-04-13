@@ -18,8 +18,8 @@
             <Grid>
                 <Border CornerRadius="4" 
                     Background="White" 
-                    Height="65" 
-                    Width="65"
+                    Height="50" 
+                    Width="50"
                     HorizontalAlignment="Left" 
                     VerticalAlignment="Top" 
                     Margin="10 0 0 0"
@@ -27,8 +27,8 @@
                 </Border>
                 <Border CornerRadius="4" 
                     Background="Transparent" 
-                    Height="65" 
-                    Width="65"
+                    Height="50" 
+                    Width="50"
                     HorizontalAlignment="Left" 
                     VerticalAlignment="Top" 
                     Margin="10 0 0 0"
@@ -43,8 +43,8 @@
                     </Border.Effect>
                 </Border>
                 <Image Source="{DynamicResource MobileIcon}"
-                   Height="50"
-                   Width="50"
+                   Height="30"
+                   Width="20"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
                    Margin="25 8 0 0">
@@ -65,12 +65,12 @@
                                FontSize="15"/>
         </StackPanel>
         <Border CornerRadius="4" 
-                Background="White" 
-                Height="135" 
-                Width="135"
+                Background="White"
+                Margin="0 30 0 0"
+                Height="150" 
+                Width="150"
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Center" 
-                Margin="0 50 0 0"
                 Opacity="0.4">
             <Border.Effect>
                 <DropShadowEffect ShadowDepth="4" 
@@ -80,115 +80,10 @@
             </Border.Effect>
         </Border>
         <Image x:Name="QR"
-                HorizontalAlignment="Center"
+               HorizontalAlignment="Center"
                VerticalAlignment="Center"
-                Margin="10 100 10 50"
-                Visibility="{Binding QRVisibility}"/>
-        <Border CornerRadius="4" 
-                Background="White" 
-                Height="30" 
-                Width="120"
-                HorizontalAlignment="Left" 
-                VerticalAlignment="Bottom" 
-                Margin="18 50 0 0"
-                Opacity="0.4">
-            <Border.Effect>
-                <DropShadowEffect ShadowDepth="4" 
-                                  Direction="270" 
-                                  Opacity="0.625" 
-                                  BlurRadius="6"/>
-            </Border.Effect>
-        </Border>
-        <Border CornerRadius="4" 
-                Background="White" 
-                Height="20" 
-                Width="40"
-                HorizontalAlignment="Right" 
-                VerticalAlignment="Bottom" 
-                Margin="0 0 20 5"
-                Opacity="0.4">
-            <Border.Effect>
-                <DropShadowEffect ShadowDepth="4" 
-                                  Direction="270" 
-                                  Opacity="0.625" 
-                                  BlurRadius="6"/>
-            </Border.Effect>
-        </Border>
-        <Border x:Name="SwitcherColor"
-                    CornerRadius="4" 
-                    Background="Transparent" 
-                    Height="10" 
-                    Width="20"
-                    HorizontalAlignment="Right" 
-                    VerticalAlignment="Bottom" 
-                    Margin="0 0 29 10"
-                    Opacity="1"
-                    BorderThickness="1"
-                    BorderBrush="White">
-            <Border.Effect>
-                <DropShadowEffect ShadowDepth="4" 
-                                      Direction="270" 
-                                      Opacity="0.625" 
-                                      BlurRadius="6"/>
-            </Border.Effect>
-        </Border>
-        <Border x:Name="SwitcherButton"  
-            CornerRadius="10" 
-                    Background="White" 
-                    Height="5" 
-                    Width="5"
-                    HorizontalAlignment="Right" 
-                    VerticalAlignment="Bottom" 
-                    Margin="0 0 42 12.5"
-                    Opacity="1"
-                    BorderThickness="1"
-                    BorderBrush="White">
-            <Border.Effect>
-                <DropShadowEffect ShadowDepth="4" 
-                                      Direction="270" 
-                                      Opacity="0.625" 
-                                      BlurRadius="6"/>
-            </Border.Effect>
-        </Border>
-        <Border 
-                    CornerRadius="4" 
-                    Background="Transparent" 
-                    Height="10" 
-                    Width="20"
-                    HorizontalAlignment="Right" 
-                    VerticalAlignment="Bottom" 
-                    Margin="0 0 29 10"
-                    Opacity="1"
-                    BorderThickness="1"
-                    BorderBrush="White">
-            <Border.Effect>
-                <DropShadowEffect ShadowDepth="4" 
-                                      Direction="270" 
-                                      Opacity="0.625" 
-                                      BlurRadius="6"/>
-            </Border.Effect>
-        </Border>
-        <Button VerticalAlignment="Bottom"
-                HorizontalAlignment="Right"
-                Height="10"
-                Width="20"
-                Margin="0 0 29 10"
-                Style="{DynamicResource ApplicationButton}"
-                Click="Switcher">
-        </Button>
-        <Button VerticalAlignment="Bottom"
-                HorizontalAlignment="Left"
-                Height="30"
-                Width="120"
-                Margin="18 0 0 0"
-                Style="{DynamicResource ApplicationButton}">
-            <TextBlock Text="{DynamicResource m_ConnectedDevice}"
-                       TextAlignment="Center"
-                       VerticalAlignment="Center"
-                       TextWrapping="WrapWithOverflow"
-                       MaxWidth="100"
-                       Foreground="White"
-                       FontSize="11"/>
-        </Button>
+               Height="130"
+               Margin="0 30 0 0"
+               Visibility="{Binding QRVisibility}"/>
     </Grid>
 </UserControl>

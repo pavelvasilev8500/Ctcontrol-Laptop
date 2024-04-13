@@ -8,14 +8,5 @@
     <Setting Name="ClientId" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="SystemUri" Type="System.String" Scope="User">
-      <Value Profile="(Default)">https://ctcontrolapi.herokuapp.com/systemdata</Value>
-    </Setting>
-    <Setting Name="ClientUri" Type="System.String" Scope="User">
-      <Value Profile="(Default)">https://ctcontrolapi.herokuapp.com/clientdata</Value>
-    </Setting>
-    <Setting Name="StatusUri" Type="System.String" Scope="User">
-      <Value Profile="(Default)">https://ctcontrolapi.herokuapp.com/statusdata</Value>
-    </Setting>
   </Settings>
 </SettingsFile>

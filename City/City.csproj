@@ -223,10 +223,6 @@
       <Project>{95aa54b2-47be-4ae3-bcf9-576ca7c89379}</Project>
       <Name>ModuleSettings</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ModuleWelcome\ModuleWelcome.csproj">
-      <Project>{e2f3c9bc-e018-4f56-99a8-3fc2b35869cf}</Project>
-      <Name>ModuleWelcome</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ResourcesLibrary\ResourcesLibrary.csproj">
       <Project>{c8daffaf-ae25-4a79-a44e-e83a9efad1d2}</Project>
       <Name>ResourcesLibrary</Name>

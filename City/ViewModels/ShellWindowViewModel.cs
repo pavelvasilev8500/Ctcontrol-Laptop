@@ -7,19 +7,16 @@ using System.Collections.Specialized;
 using ResourcesLibrary.Resources.Languages.Classes;
 using ResourcesLibrary.Resources.Wallpapers.Classes;
 using System.Diagnostics;
-using City.Models;
 using Prism.Events;
 using ClassesLibrary.Client;
 using ClassesLibrary.Classes;
 using ClassesLibrary.ServerWork;
 using System.Threading;
 using System.Windows;
-using System.Windows.Forms;
 using System.Collections.Generic;
 using City.MainWindowClasses;
 using WarningDialog.Classes;
-using System.Threading.Tasks;
-using ClassesLibrary.SystemInfo;
+using City.Models;
 
 namespace City.ViewModels
 {
@@ -30,11 +27,8 @@ namespace City.ViewModels
         private ObservableCollection<object> _views = new ObservableCollection<object>();
         private List<string> _oldViews = new List<string>();
         private string _newObject;
-        private string _oldPage { get; set; }
-        private bool _close { get; set; } = false;
         private static string ClientId { get; set; }
         private static bool IsLaptop { get; set; }
-        private static bool Notification { get; set; } = false;
         public DelegateCommand CloseAppCommand { get; private set; }
         public DelegateCommand<string> NavigateCommand { get; set; }
         public ObservableCollection<object> Views
@@ -78,34 +72,6 @@ namespace City.ViewModels
             set { SetProperty(ref isButtonEnabled, value); }
         }
 
-        private float _height1 = 1;
-        private float _height2 = 1;
-        private float _height3 = 1;
-        private float _height4 = 1;
-        public float Height1
-        {
-            get { return _height1; }
-            set { SetProperty(ref _height1, value); }
-        }
-
-        public float Height2
-        {
-            get { return _height2; }
-            set { SetProperty(ref _height2, value); }
-        }
-
-        public float Height3
-        {
-            get { return _height3; }
-            set { SetProperty(ref _height3, value); }
-        }
-
-        public float Height4
-        {
-            get { return _height4; }
-            set { SetProperty(ref _height4, value); }
-        }
-
         CancellationTokenSource cts = new CancellationTokenSource();
         public ShellWindowViewModel(IRegionManager regionManager, IEventAggregator ea)
         {
@@ -120,7 +86,6 @@ namespace City.ViewModels
             NavigateCommand = new DelegateCommand<string>(Navigate);
             _regionManager = regionManager;
             _regionManager.Regions.CollectionChanged += Regions_CollectionChanged;
-            GetWifiConnection();
         }
         private void Regions_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
@@ -213,9 +178,6 @@ namespace City.ViewModels
             {
                 MainButtonVisible = Visibility.Visible;
                 BackButtonVisible = Visibility.Hidden;
-                _ea.GetEvent<SendIdEvent>().Publish(Id());
-                _ea.GetEvent<SendSystemUriEvent>().Publish(Properties.Settings.Default.SystemUri);
-                _ea.GetEvent<SendStatusUriEvent>().Publish(Properties.Settings.Default.StatusUri);
                 _ea.GetEvent<SendBoolEvent>().Publish(IsLaptop);
             }
             if(navigatePath == "MobileView")
@@ -240,29 +202,10 @@ namespace City.ViewModels
             }
             return ClientId;
         }
-        //ShellModel shellModel = new ShellModel(Id(), IsLaptop);
-
-        private void GetWifiConnection()
-        {
-            if(InternetInfo.ConnectionStatatus())
-            {
-                Task.Run(() =>
-                {
-                    for(int i =0; i < 13; i++)
-                    {
-                        if(i < 7) Height1++;
-                        if(i < 8) Height2++;
-                        if(i < 9) Height3++;
-                        Height4++;
-                        Thread.Sleep(1000);
-                    }
-                });
-            }
-        }
+        ShellModel shellModel = new ShellModel(Id());
 
         private void CloseApp()
         {
-            Put.PutData(Properties.Settings.Default.StatusUri, ClientId, CreateJson.CreateDataJson(new ClassesLibrary.DataModels.StatusDataModel(), ClientId, false));
             Environment.Exit(0);
         }
     }

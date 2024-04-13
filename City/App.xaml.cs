@@ -28,7 +28,6 @@ namespace City
             moduleCatalog.AddModule<ModuleMainModule>();
             moduleCatalog.AddModule<ModuleSettingsModule>();
             moduleCatalog.AddModule<ModuleMobileModule>();
-            moduleCatalog.AddModule<ModuleWelcomeModule>();
         }
     }
 }

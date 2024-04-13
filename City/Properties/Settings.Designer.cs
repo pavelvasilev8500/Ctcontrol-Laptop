@@ -12,7 +12,7 @@ namespace City.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.9.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -44,42 +44,6 @@ namespace City.Properties {
             }
             set {
                 this["ClientId"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://ctcontrolapi.herokuapp.com/systemdata")]
-        public string SystemUri {
-            get {
-                return ((string)(this["SystemUri"]));
-            }
-            set {
-                this["SystemUri"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://ctcontrolapi.herokuapp.com/clientdata")]
-        public string ClientUri {
-            get {
-                return ((string)(this["ClientUri"]));
-            }
-            set {
-                this["ClientUri"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://ctcontrolapi.herokuapp.com/statusdata")]
-        public string StatusUri {
-            get {
-                return ((string)(this["StatusUri"]));
-            }
-            set {
-                this["StatusUri"] = value;
             }
         }
     }

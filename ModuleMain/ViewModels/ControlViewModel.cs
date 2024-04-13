@@ -5,12 +5,9 @@ using Prism.Regions;
 using Prism.Commands;
 using System;
 using System.Threading;
-using ClassesLibrary.ServerWork;
-using ClassesLibrary.Client;
 using Prism.Events;
 using ClassesLibrary.Classes;
 using System.Windows;
-using System.Windows.Forms;
 
 namespace ModuleMain.ViewModels
 {
@@ -72,9 +69,6 @@ namespace ModuleMain.ViewModels
                 SetProperty(ref _batteryVisibility, value);
             }
         }
-        private string ClientId { get; set; }
-        private string SystemUri { get; set; }
-        private string StatusUri { get; set; }
         private bool IsLaptop { get; set; }
         public bool KeepAlive
         {
@@ -90,9 +84,6 @@ namespace ModuleMain.ViewModels
             ThreadController();
             _regionManager = regionManager;
             _ea = ea;
-            _ea.GetEvent<SendIdEvent>().Subscribe(Id);
-            _ea.GetEvent<SendSystemUriEvent>().Subscribe(System);
-            _ea.GetEvent<SendStatusUriEvent>().Subscribe(Status);
             _ea.GetEvent<SendBoolEvent>().Subscribe(BoolMessageRecived);
             NavigateCommand = new DelegateCommand<string>(Navigate);
             ShutdonCommand = new DelegateCommand(Shutdown);
@@ -100,20 +91,6 @@ namespace ModuleMain.ViewModels
             SleepCommand = new DelegateCommand(Sleep);
         }
 
-        private void Id(string id)
-        {
-            ClientId = id;
-        }
-
-        private void System(string systemuri)
-        {
-            SystemUri = systemuri;
-        }
-
-        private void Status(string statusuri)
-        {
-            StatusUri = statusuri;
-        }
         private void BoolMessageRecived(bool islaptop)
         {
             IsLaptop = islaptop;
@@ -178,31 +155,15 @@ namespace ModuleMain.ViewModels
         }
         private void Shutdown()
         {
-            PutData(SystemUri, StatusUri, ClientId, false);
             SystemControl.halt(false, false);
         }
         private void Restart()
         {
-            PutData(SystemUri, StatusUri, ClientId, false);
             SystemControl.halt(true, false);
         }
         private void Sleep()
         {
-            Thread sleepthread = new Thread(() =>
-            {
-                PutData(SystemUri, StatusUri, ClientId, false);
-                SystemControl.Sleep(false, false, false);
-                Thread.Sleep(10000);
-                PutData(SystemUri, StatusUri, ClientId, true);
-            });
-            sleepthread.Name = "sleepthread";
-            sleepthread.Start();
-        }
-
-        private void PutData(string systemuri, string statusuri, string id, bool status)
-        {
-            Put.PutData(systemuri, id, CreateJson.CreateDataJson(new ClassesLibrary.DataModels.SystemDataModel(), id));
-            Put.PutData(statusuri, id, CreateJson.CreateDataJson(new ClassesLibrary.DataModels.StatusDataModel(), id, status));
+            SystemControl.Sleep(false, false, false);
         }
 
         public void ConfirmNavigationRequest(NavigationContext navigationContext, Action<bool> continuationCallback)
@@ -211,17 +172,11 @@ namespace ModuleMain.ViewModels
             continuationCallback(true);
         }
 
-        public void OnNavigatedTo(NavigationContext navigationContext)
-        {
-        }
-
-        public bool IsNavigationTarget(NavigationContext navigationContext)
-        {
-            return true;
-        }
-
-        public void OnNavigatedFrom(NavigationContext navigationContext)
-        {
-        }
+        //Put.PutData(statusuri, id, CreateJson.CreateDataJson(new ClassesLibrary.DataModels.StatusDataModel(), id, status));
+        #region VMFunctions
+        public void OnNavigatedTo(NavigationContext navigationContext){}
+        public bool IsNavigationTarget(NavigationContext navigationContext){ return true;}
+        public void OnNavigatedFrom(NavigationContext navigationContext){}
+        #endregion
     }
 }

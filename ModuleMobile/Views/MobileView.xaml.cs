@@ -48,25 +48,5 @@ namespace ModuleMobile.Views
                 QR.Source = bitmapimage;
             }
         }
-
-        private void Switcher(object sender, System.Windows.RoutedEventArgs e)
-        {
-            if(_switch)
-            {
-                _switch = false;
-                SwitcherButton.RenderTransform = translate;
-                var converter = new System.Windows.Media.BrushConverter(); 
-                //SwitcherColor.Background = (System.Windows.Media.Brush)converter.ConvertFromString("#FFFFFFFF");
-                translate.BeginAnimation(TranslateTransform.XProperty, new DoubleAnimation(0, 10, TimeSpan.FromMilliseconds(300)));
-            }
-            else
-            {
-                _switch = true;
-                SwitcherButton.RenderTransform = translate;
-                var converter = new System.Windows.Media.BrushConverter();
-                //SwitcherColor.Background = (System.Windows.Media.Brush)converter.ConvertFromString("#FFFFFFFF");
-                translate.BeginAnimation(TranslateTransform.XProperty, new DoubleAnimation(10, 0, TimeSpan.FromMilliseconds(300)));
-            }
-        }
     }
 }

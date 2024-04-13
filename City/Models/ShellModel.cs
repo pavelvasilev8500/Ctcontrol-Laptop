@@ -1,163 +1,94 @@
-﻿using ClassesLibrary.Client;
+﻿using City.MainWindowClasses;
+using City.Properties;
+using ClassesLibrary.Client;
+using ClassesLibrary.SystemInfo;
+using System;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
 using System.Threading;
-using ClassesLibrary.ServerWork;
-using ClassesLibrary.SystemControls;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace City.Models
 {
     class ShellModel
     {
-        private string ClientId { get; set; }
-        private string SystemUri { get; } = Properties.Settings.Default.SystemUri;
-        private string ClientUri { get; } = Properties.Settings.Default.ClientUri;
-        private string StatusUri { get; } = Properties.Settings.Default.StatusUri;
-        private bool IsLaptop { get; set; }
-
-        CancellationTokenSource cts = new CancellationTokenSource();
-        public ShellModel(string id, bool islaptop)
+        private UdpClient _udpClient = new UdpClient();
+        private static string _ip = "127.0.0.1";
+        private static int _connctionPort = 5554;
+        private static IPEndPoint _connctionEndPoint = new IPEndPoint(IPAddress.Parse(_ip), _connctionPort);
+        private UdpReceiveResult _receiveMessageResult;
+        public ShellModel(string id)
         {
-            ClientId = id;
-            IsLaptop = islaptop;
-            ThreadController();
-        }
-
-        private void ThreadController()
-        {
-            Thread systemdata = new Thread(() =>
+            SendId(id);
+            Task.Run(() =>
             {
-                GetSystemData();
+                GetMessages();
             });
-            Thread clientdata = new Thread(() =>
+        }
+
+        private void SendId(string id)
+        {
+            var data = Encoding.UTF8.GetBytes($"ServerName {id}");
+            try
             {
-                PutClientData();
+                _udpClient.Send(data, data.Length, _connctionEndPoint);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private async Task GetMessages()
+        {
+            while (true)
+            {
+                try
+                {
+                    _receiveMessageResult = await _udpClient.ReceiveAsync();
+                    if (_receiveMessageResult.Buffer != null)
+                    {
+                        var receivedData = Encoding.UTF8.GetString(_receiveMessageResult.Buffer);
+                        if (receivedData.Contains("Ready"))
+                        {
+                            break;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    break;
+                }
+            }
+            Task.Run(() =>
+            {
+                while (true)
+                {
+                    SendDataToClient();
+                    Thread.Sleep(1000);
+                }
             });
-            Thread checkdbrecord = new Thread(() =>
-            {
-                CheckDBRecord();
-            });
-            systemdata.Name = "GetSystemDataThread";
-            clientdata.Name = "GetClientDataThread";
-            checkdbrecord.Name = "CheckDbRecordThread";
-            if (Get.GetId(SystemUri, ClientId))
-            {
-                systemdata.Start();
-            }
+        }
+
+        private async Task SendDataToClient()
+        {
+            byte[] data;
+            if (!LaptopCheck.IsPcLaptop())
+                data = Encoding.UTF8.GetBytes(CreateJson.Create(SystemInfo.GetNotebookBatary()));
             else
+                data = Encoding.UTF8.GetBytes(CreateJson.Create(""));
+            try
             {
-                PostSystemData();
-                systemdata.Start();
+                await _udpClient.SendAsync(data, data.Length, new IPEndPoint(IPAddress.Parse("127.0.0.1"), 5555));
             }
-            if (Get.GetId(ClientUri, ClientId))
+            catch (System.Exception ex)
             {
-                clientdata.Start();
-            }
-            else
-            {
-                PostClientData();
-                clientdata.Start();
-            }
-            if (Get.GetId(StatusUri, ClientId))
-            {
-                PutStatusData(true);
-            }
-            else
-            {
-                PostStatusData(true);
-            }
-            checkdbrecord.Start();
-        }
-
-        private void GetSystemData()
-        {
-            do
-            {
-                if (Get.GetSystemData(SystemUri, ClientId).Item1)
-                {
-                    PutSystemData();
-                    PutStatusData(false);
-                    SystemControl.halt(false, false);
-                }
-                else if (Get.GetSystemData(SystemUri, ClientId).Item2)
-                {
-                    PutSystemData();
-                    PutStatusData(false);
-                    SystemControl.halt(true, false);
-                }
-                else if (Get.GetSystemData(SystemUri, ClientId).Item3)
-                {
-                    PutSystemData();
-                    PutStatusData(false);
-                    SystemControl.Sleep(false, false, false);
-                    Thread.Sleep(10000);
-                    PutStatusData(true);
-                }
-                Thread.Sleep(1000);
-            }
-            while (!cts.IsCancellationRequested);
-        }
-
-        private void PostSystemData()
-        {
-            Post.PostData(SystemUri, CreateJson.CreateDataJson(new ClassesLibrary.DataModels.SystemDataModel(), ClientId));
-        }
-
-        private void PostClientData()
-        {
-            if (IsLaptop)
-            {
-                Post.PostData(ClientUri, CreateJson.CreateDataJson(new ClassesLibrary.DataModels.ClientDataModel(), ClientId));
-            }
-            else
-            {
-                Post.PostData(ClientUri, CreateJson.CreateDataJson(new ClassesLibrary.DataModels.DesktopClientDataModel(), ClientId));
+                MessageBox.Show(ex.Message);
             }
         }
 
-        private void PostStatusData(bool status)
-        {
-            Post.PostData(StatusUri, CreateJson.CreateDataJson(new ClassesLibrary.DataModels.StatusDataModel(), ClientId, status));
-        }
-
-        private void PutSystemData()
-        {
-            Put.PutData(SystemUri, ClientId, CreateJson.CreateDataJson(new ClassesLibrary.DataModels.SystemDataModel(), ClientId));
-        }
-
-        private void PutClientData()
-        {
-            do
-            {
-                if(IsLaptop)
-                {
-                    Put.PutData(ClientUri, ClientId, CreateJson.CreateDataJson(new ClassesLibrary.DataModels.ClientDataModel(), ClientId));
-                }
-                else
-                {
-                    Put.PutData(ClientUri, ClientId, CreateJson.CreateDataJson(new ClassesLibrary.DataModels.DesktopClientDataModel(), ClientId));
-                }
-                Thread.Sleep(2000);
-            }
-            while (!cts.IsCancellationRequested);
-        }
-
-        private void PutStatusData(bool status)
-        {
-            Put.PutData(StatusUri, ClientId, CreateJson.CreateDataJson(new ClassesLibrary.DataModels.StatusDataModel(), ClientId, status));
-        }
-
-        private void CheckDBRecord()
-        {
-            do
-            {
-                if (!Get.GetId(SystemUri, ClientId))
-                    PostSystemData();
-                if (!Get.GetId(ClientUri, ClientId))
-                    PostClientData();
-                if (!Get.GetId(StatusUri, ClientId))
-                    PostStatusData(true);
-                Thread.Sleep(5000);
-            }
-            while (!cts.IsCancellationRequested);
-        }
     }
 }

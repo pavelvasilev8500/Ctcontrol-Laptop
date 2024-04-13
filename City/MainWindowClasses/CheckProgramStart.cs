@@ -17,15 +17,15 @@ namespace City.MainWindowClasses
             _process = process;
             if (!IsProgramStart())
             {
-                ResourceDictionary Russian = System.Windows.Application.LoadComponent(new Uri("/ResourcesLibrary;component/Resources/Languages/lang.ru-RU.xaml", UriKind.Relative)) as ResourceDictionary;
-                ResourceDictionary English = System.Windows.Application.LoadComponent(new Uri("/ResourcesLibrary;component/Resources/Languages/lang.xaml", UriKind.Relative)) as ResourceDictionary;
+                ResourceDictionary Russian = Application.LoadComponent(new Uri("/ResourcesLibrary;component/Resources/Languages/lang.ru-RU.xaml", UriKind.Relative)) as ResourceDictionary;
+                ResourceDictionary English = Application.LoadComponent(new Uri("/ResourcesLibrary;component/Resources/Languages/lang.xaml", UriKind.Relative)) as ResourceDictionary;
                 switch (CultureInfo.InstalledUICulture.Name)
                 {
                     case "ru-RU":
-                        System.Windows.MessageBox.Show(Russian["m_Anothercopy"].ToString());
+                        MessageBox.Show(Russian["m_Anothercopy"].ToString());
                         break;
                     default:
-                        System.Windows.MessageBox.Show(English["m_Anothercopy"].ToString());
+                        MessageBox.Show(English["m_Anothercopy"].ToString());
                         break;
                 }
                 Process.GetCurrentProcess().Kill();
