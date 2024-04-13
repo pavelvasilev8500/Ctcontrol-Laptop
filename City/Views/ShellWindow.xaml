@@ -363,15 +363,11 @@
                         </Image.Effect>
                     </Image>
                 </Button>
-                
+
                 <Button Height="15"
                         Width="20"
                         HorizontalAlignment="Left"
-                        Style="{DynamicResource ApplicationButton}"
-                        Click="Wifi"
-                        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-                        CommandParameter="{x:Static Dock.Top}">
-
+                        Style="{DynamicResource ApplicationButton}">
                     <Grid Margin="0 0 0 0" 
                         Height="15"
                       Width="15">
@@ -385,7 +381,7 @@
                                 VerticalAlignment="Bottom"
                                 Margin="0 0 1 2"
                                 Width="3"
-                                Height="7"/>
+                                Height="{Binding Height1}"/>
                             <Border x:Name="Wifi2" 
                                 Background="White"
                                 BorderThickness="0"
@@ -393,7 +389,7 @@
                                 VerticalAlignment="Bottom"
                                 Margin="0 0 1 2"
                                 Width="3"
-                                Height="9"/>
+                                Height="{Binding Height2}"/>
                             <Border x:Name="Wifi3" 
                                 Background="White"
                                 BorderThickness="0"
@@ -401,7 +397,7 @@
                                 VerticalAlignment="Bottom"
                                 Margin="0 0 1 2"
                                 Width="3"
-                                Height="11"/>
+                                Height="{Binding Height3}"/>
                             <Border x:Name="Wifi4" 
                                 Background="White"
                                 BorderThickness="0"
@@ -409,7 +405,7 @@
                                 VerticalAlignment="Bottom"
                                 Margin="0 0 0 2"
                                 Width="3"
-                                Height="13"/>
+                                Height="{Binding Height4}"/>
                         </StackPanel>
                     </Grid>
                 </Button>

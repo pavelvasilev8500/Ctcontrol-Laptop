@@ -18,6 +18,8 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using City.MainWindowClasses;
 using WarningDialog.Classes;
+using System.Threading.Tasks;
+using ClassesLibrary.SystemInfo;
 
 namespace City.ViewModels
 {
@@ -75,6 +77,35 @@ namespace City.ViewModels
             get { return isButtonEnabled; }
             set { SetProperty(ref isButtonEnabled, value); }
         }
+
+        private float _height1 = 1;
+        private float _height2 = 1;
+        private float _height3 = 1;
+        private float _height4 = 1;
+        public float Height1
+        {
+            get { return _height1; }
+            set { SetProperty(ref _height1, value); }
+        }
+
+        public float Height2
+        {
+            get { return _height2; }
+            set { SetProperty(ref _height2, value); }
+        }
+
+        public float Height3
+        {
+            get { return _height3; }
+            set { SetProperty(ref _height3, value); }
+        }
+
+        public float Height4
+        {
+            get { return _height4; }
+            set { SetProperty(ref _height4, value); }
+        }
+
         CancellationTokenSource cts = new CancellationTokenSource();
         public ShellWindowViewModel(IRegionManager regionManager, IEventAggregator ea)
         {
@@ -83,12 +114,13 @@ namespace City.ViewModels
             new CheckProgramStart(Process.GetCurrentProcess());
             new RunAsAdministrator();
             new BatteryCheck();
-            //Wallpapers.Wallpaper = ModuleSettings.Properties.Settings.Default.DefaultWallpaper;
-            //Languages.Language = ModuleSettings.Properties.Settings.Default.DefaultLanguage;
+            Wallpapers.Wallpaper = ModuleSettings.Properties.Settings.Default.DefaultWallpaper;
+            Languages.Language = ModuleSettings.Properties.Settings.Default.DefaultLanguage;
             CloseAppCommand = new DelegateCommand(CloseApp);
             NavigateCommand = new DelegateCommand<string>(Navigate);
             _regionManager = regionManager;
             _regionManager.Regions.CollectionChanged += Regions_CollectionChanged;
+            GetWifiConnection();
         }
         private void Regions_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
@@ -209,6 +241,24 @@ namespace City.ViewModels
             return ClientId;
         }
         //ShellModel shellModel = new ShellModel(Id(), IsLaptop);
+
+        private void GetWifiConnection()
+        {
+            if(InternetInfo.ConnectionStatatus())
+            {
+                Task.Run(() =>
+                {
+                    for(int i =0; i < 13; i++)
+                    {
+                        if(i < 7) Height1++;
+                        if(i < 8) Height2++;
+                        if(i < 9) Height3++;
+                        Height4++;
+                        Thread.Sleep(1000);
+                    }
+                });
+            }
+        }
 
         private void CloseApp()
         {

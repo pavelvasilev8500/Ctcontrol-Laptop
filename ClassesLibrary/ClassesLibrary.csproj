@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
@@ -78,6 +80,7 @@
     <Compile Include="ServerWork\Put.cs" />
     <Compile Include="SystemControls\Autorun.cs" />
     <Compile Include="SystemControls\SystemControl.cs" />
+    <Compile Include="SystemInfo\InternetInfo.cs" />
     <Compile Include="SystemInfo\SystemInfo.cs" />
     <Compile Include="Window\WindowsPostition.cs" />
   </ItemGroup>

@@ -5,6 +5,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
+using ClassesLibrary.SystemInfo;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace City.Views
 {
@@ -78,28 +81,28 @@ namespace City.Views
             }
         }
 
-        private void Wifi(object sender, RoutedEventArgs e)
-        {
-            Wifi1.RenderTransform = wifi1;
-            Wifi2.RenderTransform = wifi2;
-            Wifi3.RenderTransform = wifi3;
-            Wifi4.RenderTransform = wifi4;
-            if (_wifi)
-            {
-                wifi1.BeginAnimation(TranslateTransform.YProperty, new DoubleAnimation(0, 5, TimeSpan.FromMilliseconds(300)));
-                wifi2.BeginAnimation(TranslateTransform.YProperty, new DoubleAnimation(0, 7, TimeSpan.FromMilliseconds(300)));
-                wifi3.BeginAnimation(TranslateTransform.YProperty, new DoubleAnimation(0, 9, TimeSpan.FromMilliseconds(300)));
-                wifi4.BeginAnimation(TranslateTransform.YProperty, new DoubleAnimation(0, 11, TimeSpan.FromMilliseconds(300)));
-                _wifi = false;
-            }
-            else
-            {
-                wifi1.BeginAnimation(TranslateTransform.YProperty, new DoubleAnimation(5, 0, TimeSpan.FromMilliseconds(300)));
-                wifi2.BeginAnimation(TranslateTransform.YProperty, new DoubleAnimation(7, 0, TimeSpan.FromMilliseconds(300)));
-                wifi3.BeginAnimation(TranslateTransform.YProperty, new DoubleAnimation(9, 0, TimeSpan.FromMilliseconds(300)));
-                wifi4.BeginAnimation(TranslateTransform.YProperty, new DoubleAnimation(11, 0, TimeSpan.FromMilliseconds(300)));
-                _wifi = true;
-            }
-        }
+
+        //private void Wifi(bool IsConnect)
+        //{
+        //    Wifi1.RenderTransform = wifi1;
+        //    Wifi2.RenderTransform = wifi2;
+        //    Wifi3.RenderTransform = wifi3;
+        //    Wifi4.RenderTransform = wifi4;
+        //    //InternetInfo.ConnectionStatatus())
+        //    if (IsConnect)
+        //    {
+        //        wifi1.BeginAnimation(TranslateTransform.YProperty, new DoubleAnimation(0, 5, TimeSpan.FromMilliseconds(300)));
+        //        wifi2.BeginAnimation(TranslateTransform.YProperty, new DoubleAnimation(0, 7, TimeSpan.FromMilliseconds(300)));
+        //        wifi3.BeginAnimation(TranslateTransform.YProperty, new DoubleAnimation(0, 9, TimeSpan.FromMilliseconds(300)));
+        //        wifi4.BeginAnimation(TranslateTransform.YProperty, new DoubleAnimation(0, 11, TimeSpan.FromMilliseconds(300)));
+        //    }
+        //    else
+        //    {
+        //        wifi1.BeginAnimation(TranslateTransform.YProperty, new DoubleAnimation(5, 0, TimeSpan.FromMilliseconds(300)));
+        //        wifi2.BeginAnimation(TranslateTransform.YProperty, new DoubleAnimation(7, 0, TimeSpan.FromMilliseconds(300)));
+        //        wifi3.BeginAnimation(TranslateTransform.YProperty, new DoubleAnimation(9, 0, TimeSpan.FromMilliseconds(300)));
+        //        wifi4.BeginAnimation(TranslateTransform.YProperty, new DoubleAnimation(11, 0, TimeSpan.FromMilliseconds(300)));
+        //    }
+        //}
     }
 }
